@@ -5,10 +5,6 @@
 .sidenav {
   width: 200px;
 }
-/* 
-.sidenav .mat-toolbar {
-  background: inherit;
-} */
 
 .mat-toolbar.mat-primary {
   position: sticky;
