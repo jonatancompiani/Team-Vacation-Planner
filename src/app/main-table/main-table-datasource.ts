@@ -82,40 +82,50 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
   disconnect(): void {}
 
 
-  private getDates(){
+  private getDates() {
     var data: MainTableItem[] = [];
+    var propNames: string[] = this.getPropertyNames();
 
     var currentYear = new Date().getFullYear();
     var firstDayOfYear = new Date(currentYear, 0, 1);
-    var lastDayOfYear = new Date(currentYear, 12, 31);
-
-    var propNames: string[] | undefined;
+    var lastDayOfYear = new Date(currentYear, 11, 31);
 
     var monthToAdd: MainTableItem | undefined;
     var propIndex: number = 0.
     for (var d = firstDayOfYear; d <= lastDayOfYear; d.setDate(d.getDate() + 1)) {
       if (d.getDate() == 1){
-        if (!!monthToAdd){
-          data.push(monthToAdd);
-        }
+
+        // creates an empty month (row)
         monthToAdd = { id: d.getMonth(), month: MONTHS[d.getMonth()], sun1: undefined, mon1: undefined, tue1: undefined, wed1: undefined, thu1: undefined, fri1: undefined, sat1: undefined, sun2: undefined, mon2: undefined, tue2: undefined, wed2: undefined, thu2: undefined, fri2: undefined, sat2: undefined, sun3: undefined, mon3: undefined, tue3: undefined, wed3: undefined, thu3: undefined, fri3: undefined, sat3: undefined, sun4: undefined, mon4: undefined, tue4: undefined, wed4: undefined, thu4: undefined, fri4: undefined, sat4: undefined, sun5: undefined, mon5: undefined, tue5: undefined, wed5: undefined, thu5: undefined, fri5: undefined, sat5: undefined, sun6: undefined, mon6: undefined };
-      
-        if (!propNames){
-          propNames = Object.getOwnPropertyNames(monthToAdd);
-        }
-      
-        propIndex = propNames.indexOf(this.getPropFromDayOfWeek(d))-1;
+
+        // sets the property index to allocate the 1st of the month on correct weekday (column)
+        propIndex = propNames.indexOf(this.getPropFromDayOfWeek(d));
       }
-      if(propNames){
-        propIndex += 1;
-        var propName = propNames[propIndex];
-      
-        if(monthToAdd)
-          monthToAdd[propName as keyof MainTableItem] = d.getDate() as never;
+
+      // get the property (column) name
+      var propName = propNames[propIndex++];
+
+      if (!monthToAdd) continue; // will never hit, here just for the interpreter
+
+      // Sets the day (cell) value
+      monthToAdd[propName as keyof MainTableItem] = d.getDate() as never;
+
+      if (this.isLastDayOfMonth(d)) {
+        data.push(monthToAdd);
       }
     }
 
     return data;
+  }
+
+  private isLastDayOfMonth(date: Date): boolean {
+    var lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    return date.getDate() == lastDayOfMonth;
+  }
+
+  private getPropertyNames(): string[] {
+    const instance: MainTableItem = { id: 0, month: "", sun1: undefined, mon1: undefined, tue1: undefined, wed1: undefined, thu1: undefined, fri1: undefined, sat1: undefined, sun2: undefined, mon2: undefined, tue2: undefined, wed2: undefined, thu2: undefined, fri2: undefined, sat2: undefined, sun3: undefined, mon3: undefined, tue3: undefined, wed3: undefined, thu3: undefined, fri3: undefined, sat3: undefined, sun4: undefined, mon4: undefined, tue4: undefined, wed4: undefined, thu4: undefined, fri4: undefined, sat4: undefined, sun5: undefined, mon5: undefined, tue5: undefined, wed5: undefined, thu5: undefined, fri5: undefined, sat5: undefined, sun6: undefined, mon6: undefined };
+    return Object.getOwnPropertyNames(instance);
   }
 
   private getPropFromDayOfWeek(date: Date): keyof MainTableItem{
