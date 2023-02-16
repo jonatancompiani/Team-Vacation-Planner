@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { Holiday, HolidayDataSource } from './holiday-datasource';
-import { MainTableDataSource, MainTableItem } from './main-table-datasource';
+import { DayData, MainTableDataSource, MainTableItem } from './main-table-datasource';
 import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
 
 @Component({
@@ -69,5 +69,17 @@ export class MainTableComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
     this.teamMembers = this.teamMembersDataSource.data;
     this.holidays = this.holidaysDataSource.data;
+  }
+
+  getCellClasses(day: DayData): string{
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    var result = day?.displayText ? "validday" : "";
+    result += day?.holiday ? " holiday" : "";
+    result += day?.date.getTime() == today.getTime() ? " today" : "";
+    result += day?.date.getTime() < today.getTime() ? " pastdate" : "";
+    console.log(day?.date.toDateString());
+    return result;
   }
 }

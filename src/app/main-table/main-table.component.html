@@ -22,187 +22,189 @@
           <td mat-cell *matCellDef="let row">{{row.month}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="sun1">
+        <ng-container matColumnDef="sun1" >
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday': !!row.sun1}">{{row.sun1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun1)" [matTooltip]="row.sun1?.holiday">{{row.sun1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon1">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon1}">{{row.mon1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon1)" [matTooltip]="row.mon1?.holiday">{{row.mon1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue1">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.tue1}">{{row.tue1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue1)" [matTooltip]="row.tue1?.holiday">{{row.tue1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed1">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.wed1}">{{row.wed1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed1)" [matTooltip]="row.wed1?.holiday">{{row.wed1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu1">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.thu1}">{{row.thu1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu1)" [matTooltip]="row.thu1?.holiday">{{row.thu1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri1">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.fri1}">{{row.fri1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri1)" [matTooltip]="row.fri1?.holiday">{{row.fri1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat1">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sat1}">{{row.sat1}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat1)" [matTooltip]="row.sat1?.holiday">{{row.sat1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun2">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sun2}">{{row.sun2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun2)" [matTooltip]="row.sun2?.holiday">{{row.sun2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon2">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon2}">{{row.mon2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon2)" [matTooltip]="row.mon2?.holiday">{{row.mon2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue2">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.tue2}">{{row.tue2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue2)" [matTooltip]="row.tue2?.holiday">{{row.tue2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed2">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.wed2}">{{row.wed2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed2)" [matTooltip]="row.wed2?.holiday">{{row.wed2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu2">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.thu2}">{{row.thu2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu2)" [matTooltip]="row.thu2?.holiday">{{row.thu2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri2">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.fri2}">{{row.fri2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri2)" [matTooltip]="row.fri2?.holiday">{{row.fri2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat2">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sat2}">{{row.sat2}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat2)" [matTooltip]="row.sat2?.holiday">{{row.sat2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun3">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sun3}">{{row.sun3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun3)" [matTooltip]="row.sun3?.holiday">{{row.sun3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon3">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon3}">{{row.mon3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon3)" [matTooltip]="row.mon3?.holiday">{{row.mon3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue3">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.tue3}">{{row.tue3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue3)" [matTooltip]="row.tue3?.holiday">{{row.tue3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed3">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.wed3}">{{row.wed3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed3)" [matTooltip]="row.wed3?.holiday">{{row.wed3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu3">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.thu3}">{{row.thu3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu3)" [matTooltip]="row.thu3?.holiday">{{row.thu3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri3">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.fri3}">{{row.fri3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri3)" [matTooltip]="row.fri3?.holiday">{{row.fri3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat3">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sat3}">{{row.sat3}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat3)" [matTooltip]="row.sat3?.holiday">{{row.sat3?.displayText}}</td>
         </ng-container>
+
         <ng-container matColumnDef="sun4">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sun4}">{{row.sun4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun4)" [matTooltip]="row.sun4?.holiday">{{row.sun4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon4">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon4}">{{row.mon4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon4)" [matTooltip]="row.mon4?.holiday">{{row.mon4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue4">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.tue4}">{{row.tue4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue4)" [matTooltip]="row.tue4?.holiday">{{row.tue4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed4">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.wed4}">{{row.wed4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed4)" [matTooltip]="row.wed4?.holiday">{{row.wed4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu4">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.thu4}">{{row.thu4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu4)" [matTooltip]="row.thu4?.holiday">{{row.thu4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri4">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.fri4}">{{row.fri4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri4)" [matTooltip]="row.fri4?.holiday">{{row.fri4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat4">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sat4}">{{row.sat4}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat4)" [matTooltip]="row.sat4?.holiday">{{row.sat4?.displayText}}</td>
         </ng-container>
+
         <ng-container matColumnDef="sun5">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sun5}">{{row.sun5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun5)" [matTooltip]="row.sun5?.holiday">{{row.sun5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon5">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon5}">{{row.mon5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon5)" [matTooltip]="row.mon5?.holiday">{{row.mon5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue5">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.tue5}">{{row.tue5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue5)" [matTooltip]="row.tue5?.holiday">{{row.tue5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed5">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.wed5}">{{row.wed5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed5)" [matTooltip]="row.wed5?.holiday">{{row.wed5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu5">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.thu5}">{{row.thu5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu5)" [matTooltip]="row.thu5?.holiday">{{row.thu5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri5">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.fri5}">{{row.fri5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri5)" [matTooltip]="row.fri5?.holiday">{{row.fri5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat5">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sat5}">{{row.sat5}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat5)" [matTooltip]="row.sat5?.holiday">{{row.sat5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun6">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sun6}">{{row.sun6}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun6)" [matTooltip]="row.sun6?.holiday">{{row.sun6?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon6">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon6}">{{row.mon6}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon6)" [matTooltip]="row.mon6?.holiday">{{row.mon6?.displayText}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

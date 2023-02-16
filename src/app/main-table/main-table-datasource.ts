@@ -3,47 +3,56 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { Holiday, HolidayDataSource } from './holiday-datasource';
+import { TeamMember } from './team-member-datasource';
 
 export interface MainTableItem {
   id: number;
   month: string;
-  sun1: string | undefined;
-  mon1: string | undefined;
-  tue1: string | undefined;
-  wed1: string | undefined;
-  thu1: string | undefined;
-  fri1: string | undefined;
-  sat1: string | undefined;
-  sun2: string | undefined;
-  mon2: string | undefined;
-  tue2: string | undefined;
-  wed2: string | undefined;
-  thu2: string | undefined;
-  fri2: string | undefined;
-  sat2: string | undefined;
-  sun3: string | undefined;
-  mon3: string | undefined;
-  tue3: string | undefined;
-  wed3: string | undefined;
-  thu3: string | undefined;
-  fri3: string | undefined;
-  sat3: string | undefined;
-  sun4: string | undefined;
-  mon4: string | undefined;
-  tue4: string | undefined;
-  wed4: string | undefined;
-  thu4: string | undefined;
-  fri4: string | undefined;
-  sat4: string | undefined;
-  sun5: string | undefined;
-  mon5: string | undefined;
-  tue5: string | undefined;
-  wed5: string | undefined;
-  thu5: string | undefined;
-  fri5: string | undefined;
-  sat5: string | undefined;
-  sun6: string | undefined;
-  mon6: string | undefined;
+  sun1: DayData | undefined;
+  mon1: DayData | undefined;
+  tue1: DayData | undefined;
+  wed1: DayData | undefined;
+  thu1: DayData | undefined;
+  fri1: DayData | undefined;
+  sat1: DayData | undefined;
+  sun2: DayData | undefined;
+  mon2: DayData | undefined;
+  tue2: DayData | undefined;
+  wed2: DayData | undefined;
+  thu2: DayData | undefined;
+  fri2: DayData | undefined;
+  sat2: DayData | undefined;
+  sun3: DayData | undefined;
+  mon3: DayData | undefined;
+  tue3: DayData | undefined;
+  wed3: DayData | undefined;
+  thu3: DayData | undefined;
+  fri3: DayData | undefined;
+  sat3: DayData | undefined;
+  sun4: DayData | undefined;
+  mon4: DayData | undefined;
+  tue4: DayData | undefined;
+  wed4: DayData | undefined;
+  thu4: DayData | undefined;
+  fri4: DayData | undefined;
+  sat4: DayData | undefined;
+  sun5: DayData | undefined;
+  mon5: DayData | undefined;
+  tue5: DayData | undefined;
+  wed5: DayData | undefined;
+  thu5: DayData | undefined;
+  fri5: DayData | undefined;
+  sat5: DayData | undefined;
+  sun6: DayData | undefined;
+  mon6: DayData | undefined;
+}
+
+export interface DayData {
+  displayText: string;
+  date: Date;
+  holiday: string | undefined,
+  vacationingMembers: TeamMember[] | undefined
 }
 
 const MONTHS: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -58,8 +67,11 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
  
+  holidays: Holiday[];
+
   constructor() {
     super();
+    this.holidays = new HolidayDataSource().data;
   }
 
   /**
@@ -106,8 +118,10 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
 
       if (!monthToAdd) continue; // will never hit, here just for the interpreter
 
+      var dayData: DayData = {date: new Date(d), displayText: d.getDate().toString(), holiday: this.getHoliday(d), vacationingMembers: undefined }
+
       // sets the day (cell) value
-      monthToAdd[propName as keyof MainTableItem] = d.getDate() as never;
+      monthToAdd[propName as keyof MainTableItem] = dayData as never;
 
       // on last day of month (row), adds it to the main table
       if (this.isLastDayOfMonth(d)) {
@@ -116,6 +130,11 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
     }
 
     return data;
+  }
+
+  private getHoliday(date: Date): string | undefined{
+    var filteredHolidays = this.holidays.filter((h)=> h.date.getTime() == date.getTime());
+    return  filteredHolidays.length > 0 ? filteredHolidays[0].description : undefined
   }
 
   private isLastDayOfMonth(date: Date): boolean {
@@ -134,5 +153,4 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
 
     return propNames[date.getDay()] as keyof MainTableItem;
   }
-
 }
