@@ -79,7 +79,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect(): void {}
+  disconnect(): void { }
 
 
   private getDates() {
@@ -93,7 +93,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
     var monthToAdd: MainTableItem | undefined;
     var propIndex: number = 0.
     for (var d = firstDayOfYear; d <= lastDayOfYear; d.setDate(d.getDate() + 1)) {
-      if (d.getDate() == 1){
+      if (d.getDate() == 1) {
 
         // creates an empty month (row)
         monthToAdd = { id: d.getMonth(), month: MONTHS[d.getMonth()], sun1: undefined, mon1: undefined, tue1: undefined, wed1: undefined, thu1: undefined, fri1: undefined, sat1: undefined, sun2: undefined, mon2: undefined, tue2: undefined, wed2: undefined, thu2: undefined, fri2: undefined, sat2: undefined, sun3: undefined, mon3: undefined, tue3: undefined, wed3: undefined, thu3: undefined, fri3: undefined, sat3: undefined, sun4: undefined, mon4: undefined, tue4: undefined, wed4: undefined, thu4: undefined, fri4: undefined, sat4: undefined, sun5: undefined, mon5: undefined, tue5: undefined, wed5: undefined, thu5: undefined, fri5: undefined, sat5: undefined, sun6: undefined, mon6: undefined };
@@ -107,9 +107,10 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
 
       if (!monthToAdd) continue; // will never hit, here just for the interpreter
 
-      // Sets the day (cell) value
+      // sets the day (cell) value
       monthToAdd[propName as keyof MainTableItem] = d.getDate() as never;
 
+      // on last day of month (row), adds it to the main table
       if (this.isLastDayOfMonth(d)) {
         data.push(monthToAdd);
       }
@@ -128,7 +129,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
     return Object.getOwnPropertyNames(instance);
   }
 
-  private getPropFromDayOfWeek(date: Date): keyof MainTableItem{
+  private getPropFromDayOfWeek(date: Date): keyof MainTableItem {
 
     var propNames = ["sun1", "mon1", "tue1", "wed1", "thu1", "fri1", "sat1"];
 
