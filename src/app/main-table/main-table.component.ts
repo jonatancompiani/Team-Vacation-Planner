@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { Holiday, HolidayDataSource } from './holiday-datasource';
 import { MainTableDataSource, MainTableItem } from './main-table-datasource';
 import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
 
@@ -11,8 +12,10 @@ import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
 export class MainTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<MainTableItem>;
   @ViewChild(MatTable) teamMembers!: TeamMember[] | undefined;
+  @ViewChild(MatTable) holidays!: Holiday[] | undefined;
   dataSource: MainTableDataSource;
   teamMembersDataSource: TeamMemberDataSource;
+  holidaysDataSource: HolidayDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -59,10 +62,12 @@ export class MainTableComponent implements AfterViewInit {
   constructor() {
     this.dataSource = new MainTableDataSource();
     this.teamMembersDataSource = new TeamMemberDataSource();
+    this.holidaysDataSource = new HolidayDataSource();
   }
 
   ngAfterViewInit(): void {
     this.table.dataSource = this.dataSource;
     this.teamMembers = this.teamMembersDataSource.data;
+    this.holidays = this.holidaysDataSource.data;
   }
 }
