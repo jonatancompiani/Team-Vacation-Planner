@@ -4,7 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
-// TODO: Replace this with your own data model type
 export interface MainTableItem {
   id: number;
   month: string;
@@ -58,7 +57,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
   data: MainTableItem[] | undefined;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-
+ 
   constructor() {
     super();
   }
