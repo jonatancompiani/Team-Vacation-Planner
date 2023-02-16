@@ -1,15 +1,57 @@
+<mat-grid-list cols="1" rowHeight="10rem">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image1"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Shiba Inu</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image2"></div>
+        <mat-card-title>Hints Cat</mat-card-title>
+        <mat-card-subtitle>Random cat</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image3"></div>
+        <mat-card-title>Calm Cat</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image4"></div>
+        <mat-card-title>Multi Cat</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image5"></div>
+        <mat-card-title>Method Cat</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <button mat-fab color="basic" class="button-margin">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
 
 <div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <table mat-table class="full-width-table" aria-label="Elements">
 
-    <ng-container matColumnDef="id" >
+    <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let row" >{{row.id}}</td>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
     </ng-container>
 
     <ng-container matColumnDef="month">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row" >{{row.month}}</td>
+      <td mat-cell *matCellDef="let row">{{row.month}}</td>
     </ng-container>
 
     <ng-container matColumnDef="sun1">
@@ -189,7 +231,7 @@
       <th mat-header-cell *matHeaderCellDef>S</th>
       <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.sun6}">{{row.sun6}}</td>
     </ng-container>
-  
+
     <ng-container matColumnDef="mon6">
       <th mat-header-cell *matHeaderCellDef>M</th>
       <td mat-cell *matCellDef="let row" [ngClass]="{'validday' : !!row.mon6}">{{row.mon6}}</td>
@@ -198,5 +240,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
 </div>

@@ -1,3 +1,7 @@
+$primary: #3F51B5
+$main-background: #FAFAFA
+$component-background: white
+  
 .full-width-table 
   width: 100%
 
@@ -5,7 +9,10 @@
   background-color: aliceblue
 
 .validday:hover 
-    background-color: lightblue    
+    background-color: $primary
+    color: $component-background
+    cursor: pointer
+    border-radius: 25px
 
 .mat-column-sun1, .mat-column-sat1,
 .mat-column-sun2, .mat-column-sat2,
@@ -21,3 +28,44 @@ td
 
 .holiday
   background-color: lightsalmon !important
+
+table
+  padding-left: 1rem
+  padding-right: 1rem
+
+.mat-mdc-card
+  max-width: 500px
+  margin-left: 20px
+
+.button-margin
+  margin-left: 30px
+
+
+.example-header-image1
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg')
+  background-size: cover
+  border: 5px solid red
+
+.example-header-image2
+  background-image: url('https://http.cat/103')
+  background-size: cover
+  border: 5px solid green
+
+.example-header-image3
+  background-image: url('https://http.cat/420')
+  background-size: cover
+  border: 5px solid gold
+
+.example-header-image4
+  background-image: url('https://http.cat/207')
+  background-size: cover
+  border: 5px solid blue
+
+.example-header-image5
+  background-image: url('https://http.cat/405')
+  background-size: cover
+  border: 5px solid magenta
+
+.mat-mdc-card:hover
+  background-color: aliceblue
+  cursor: pointer
