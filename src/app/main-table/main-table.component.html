@@ -1,38 +1,12 @@
-<mat-grid-list cols="1" rowHeight="10rem">
+<mat-grid-list cols="1" rowHeight="9rem">
+
   <mat-grid-tile>
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image1"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Shiba Inu</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image2"></div>
-        <mat-card-title>Hints Cat</mat-card-title>
-        <mat-card-subtitle>Random cat</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image3"></div>
-        <mat-card-title>Calm Cat</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image4"></div>
-        <mat-card-title>Multi Cat</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image5"></div>
-        <mat-card-title>Method Cat</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
+    <mat-card *ngFor="let member of teamMembers">
+      <mat-card-header ng-rep [ngStyle]="{'color': member.color}">
+        <div mat-card-avatar [ngStyle]="{'border-color': member.color, 'background-image': 'url(' + member.pictureUrl + ')'}">
+        </div>
+        <mat-card-title>{{member.name}}</mat-card-title>
+        <mat-card-subtitle>{{member.role}}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
     <button mat-fab color="basic" class="button-margin">

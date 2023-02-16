@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { MainTableDataSource, MainTableItem } from './main-table-datasource';
+import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
 
 @Component({
   selector: 'app-main-table',
@@ -10,10 +9,10 @@ import { MainTableDataSource, MainTableItem } from './main-table-datasource';
   styleUrls: ['./main-table.component.sass']
 })
 export class MainTableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<MainTableItem>;
+  @ViewChild(MatTable) teamMembers!: TeamMember[] | undefined;
   dataSource: MainTableDataSource;
+  teamMembersDataSource: TeamMemberDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -59,9 +58,11 @@ export class MainTableComponent implements AfterViewInit {
 
   constructor() {
     this.dataSource = new MainTableDataSource();
+    this.teamMembersDataSource = new TeamMemberDataSource();
   }
 
   ngAfterViewInit(): void {
     this.table.dataSource = this.dataSource;
+    this.teamMembers = this.teamMembersDataSource.data;
   }
 }
