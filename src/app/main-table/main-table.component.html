@@ -1,20 +1,16 @@
 <mat-grid-list cols="1" rowHeight="9rem">
 
   <mat-grid-tile>
-    <mat-card *ngFor="let member of teamMembers">
-      <mat-card-header ng-rep [ngStyle]="{'color': member.color}">
-        <div mat-card-avatar [ngStyle]="{'border-color': member.color, 'background-image': 'url(' + member.pictureUrl + ')'}">
-        </div>
-        <mat-card-title>{{member.name}}</mat-card-title>
-        <mat-card-subtitle>{{member.role}}</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <button mat-fab color="basic" class="button-margin">
-      <mat-icon>add</mat-icon>
-    </button>
+    <mat-chip-listbox>
+      <mat-chip-option *ngFor="let member of teamMembers"
+        [ngStyle]="{'background-color': member.color}">
+        <img matChipAvatar [src]="member.pictureUrl" />
+        {{member.name}}
+      </mat-chip-option>
+    </mat-chip-listbox>
   </mat-grid-tile>
 
-  <mat-grid-tile rowspan="5">    
+  <mat-grid-tile rowspan="5">
     <section class="mat-elevation-z8" tabindex="0">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="month" sticky>
@@ -22,189 +18,226 @@
           <td mat-cell *matCellDef="let row">{{row.month}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="sun1" >
+        <ng-container matColumnDef="sun1">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun1)" [matTooltip]="row.sun1?.holiday">{{row.sun1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun1)" [matTooltip]="getTooltip(row.sun1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sun1?.vacationingMembers)}">
+            {{row.sun1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon1">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon1)" [matTooltip]="row.mon1?.holiday">{{row.mon1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon1)" [matTooltip]="getTooltip(row.mon1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.mon1?.vacationingMembers)}">
+            {{row.mon1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue1">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue1)" [matTooltip]="row.tue1?.holiday">{{row.tue1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue1)" [matTooltip]="getTooltip(row.tue1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.tue1?.vacationingMembers)}">
+            {{row.tue1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed1">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed1)" [matTooltip]="row.wed1?.holiday">{{row.wed1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed1)" [matTooltip]="getTooltip(row.wed1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.wed1?.vacationingMembers)}">
+            {{row.wed1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu1">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu1)" [matTooltip]="row.thu1?.holiday">{{row.thu1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu1)" [matTooltip]="getTooltip(row.thu1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.thu1?.vacationingMembers)}">
+            {{row.thu1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri1">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri1)" [matTooltip]="row.fri1?.holiday">{{row.fri1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri1)" [matTooltip]="getTooltip(row.fri1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.fri1?.vacationingMembers)}">
+            {{row.fri1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat1">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat1)" [matTooltip]="row.sat1?.holiday">{{row.sat1?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat1)" [matTooltip]="getTooltip(row.sat1)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sat1?.vacationingMembers)}">
+            {{row.sat1?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun2">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun2)" [matTooltip]="row.sun2?.holiday">{{row.sun2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun2)" [matTooltip]="getTooltip(row.sun2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sun2?.vacationingMembers)}">
+            {{row.sun2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon2">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon2)" [matTooltip]="row.mon2?.holiday">{{row.mon2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon2)" [matTooltip]="getTooltip(row.mon2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.mon2?.vacationingMembers)}">
+            {{row.mon2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue2">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue2)" [matTooltip]="row.tue2?.holiday">{{row.tue2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue2)" [matTooltip]="getTooltip(row.tue2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.tue2?.vacationingMembers)}">
+            {{row.tue2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed2">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed2)" [matTooltip]="row.wed2?.holiday">{{row.wed2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed2)" [matTooltip]="getTooltip(row.wed2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.wed2?.vacationingMembers)}">
+            {{row.wed2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu2">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu2)" [matTooltip]="row.thu2?.holiday">{{row.thu2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu2)" [matTooltip]="getTooltip(row.thu2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.thu2?.vacationingMembers)}">
+            {{row.thu2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri2">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri2)" [matTooltip]="row.fri2?.holiday">{{row.fri2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri2)" [matTooltip]="getTooltip(row.fri2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.fri2?.vacationingMembers)}">
+            {{row.fri2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat2">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat2)" [matTooltip]="row.sat2?.holiday">{{row.sat2?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat2)" [matTooltip]="getTooltip(row.sat2)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sat2?.vacationingMembers)}">
+            {{row.sat2?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun3">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun3)" [matTooltip]="row.sun3?.holiday">{{row.sun3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun3)" [matTooltip]="getTooltip(row.sun3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sun3?.vacationingMembers)}">
+            {{row.sun3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon3">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon3)" [matTooltip]="row.mon3?.holiday">{{row.mon3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon3)" [matTooltip]="getTooltip(row.mon3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.mon3?.vacationingMembers)}">
+            {{row.mon3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue3">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue3)" [matTooltip]="row.tue3?.holiday">{{row.tue3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue3)" [matTooltip]="getTooltip(row.tue3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.tue3?.vacationingMembers)}">
+            {{row.tue3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed3">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed3)" [matTooltip]="row.wed3?.holiday">{{row.wed3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed3)" [matTooltip]="getTooltip(row.wed3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.wed3?.vacationingMembers)}">
+            {{row.wed3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu3">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu3)" [matTooltip]="row.thu3?.holiday">{{row.thu3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu3)" [matTooltip]="getTooltip(row.thu3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.thu3?.vacationingMembers)}">
+            {{row.thu3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri3">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri3)" [matTooltip]="row.fri3?.holiday">{{row.fri3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri3)" [matTooltip]="getTooltip(row.fri3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.fri3?.vacationingMembers)}">
+            {{row.fri3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat3">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat3)" [matTooltip]="row.sat3?.holiday">{{row.sat3?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat3)" [matTooltip]="getTooltip(row.sat3)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sat3?.vacationingMembers)}">
+            {{row.sat3?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun4">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun4)" [matTooltip]="row.sun4?.holiday">{{row.sun4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun4)" [matTooltip]="getTooltip(row.sun4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sun4?.vacationingMembers)}">
+            {{row.sun4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon4">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon4)" [matTooltip]="row.mon4?.holiday">{{row.mon4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon4)" [matTooltip]="getTooltip(row.mon4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.mon4?.vacationingMembers)}">
+            {{row.mon4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue4">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue4)" [matTooltip]="row.tue4?.holiday">{{row.tue4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue4)" [matTooltip]="getTooltip(row.tue4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.tue4?.vacationingMembers)}">
+            {{row.tue4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed4">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed4)" [matTooltip]="row.wed4?.holiday">{{row.wed4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed4)" [matTooltip]="getTooltip(row.wed4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.wed4?.vacationingMembers)}">
+            {{row.wed4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu4">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu4)" [matTooltip]="row.thu4?.holiday">{{row.thu4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu4)" [matTooltip]="getTooltip(row.thu4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.thu4?.vacationingMembers)}">
+            {{row.thu4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri4">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri4)" [matTooltip]="row.fri4?.holiday">{{row.fri4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri4)" [matTooltip]="getTooltip(row.fri4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.fri4?.vacationingMembers)}">
+            {{row.fri4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat4">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat4)" [matTooltip]="row.sat4?.holiday">{{row.sat4?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat4)" [matTooltip]="getTooltip(row.sat4)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sat4?.vacationingMembers)}">
+            {{row.sat4?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun5">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun5)" [matTooltip]="row.sun5?.holiday">{{row.sun5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun5)" [matTooltip]="getTooltip(row.sun5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sun5?.vacationingMembers)}">
+            {{row.sun5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon5">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon5)" [matTooltip]="row.mon5?.holiday">{{row.mon5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon5)" [matTooltip]="getTooltip(row.mon5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.mon5?.vacationingMembers)}">
+            {{row.mon5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="tue5">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue5)" [matTooltip]="row.tue5?.holiday">{{row.tue5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.tue5)" [matTooltip]="getTooltip(row.tue5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.tue5?.vacationingMembers)}">
+            {{row.tue5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="wed5">
           <th mat-header-cell *matHeaderCellDef>W</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed5)" [matTooltip]="row.wed5?.holiday">{{row.wed5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.wed5)" [matTooltip]="getTooltip(row.wed5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.wed5?.vacationingMembers)}">
+            {{row.wed5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="thu5">
           <th mat-header-cell *matHeaderCellDef>T</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu5)" [matTooltip]="row.thu5?.holiday">{{row.thu5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.thu5)" [matTooltip]="getTooltip(row.thu5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.thu5?.vacationingMembers)}">
+            {{row.thu5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="fri5">
           <th mat-header-cell *matHeaderCellDef>F</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri5)" [matTooltip]="row.fri5?.holiday">{{row.fri5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.fri5)" [matTooltip]="getTooltip(row.fri5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.fri5?.vacationingMembers)}">
+            {{row.fri5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sat5">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat5)" [matTooltip]="row.sat5?.holiday">{{row.sat5?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sat5)" [matTooltip]="getTooltip(row.sat5)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sat5?.vacationingMembers)}">
+            {{row.sat5?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sun6">
           <th mat-header-cell *matHeaderCellDef>S</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun6)" [matTooltip]="row.sun6?.holiday">{{row.sun6?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.sun6)" [matTooltip]="getTooltip(row.sun6)" [ngStyle]="{'background-color': this.getBackgroundColor(row.sun6?.vacationingMembers)}">
+            {{row.sun6?.displayText}}</td>
         </ng-container>
 
         <ng-container matColumnDef="mon6">
           <th mat-header-cell *matHeaderCellDef>M</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon6)" [matTooltip]="row.mon6?.holiday">{{row.mon6?.displayText}}</td>
+          <td mat-cell *matCellDef="let row" [ngClass]="this.getCellClasses(row.mon6)" [matTooltip]="getTooltip(row.mon6)" [ngStyle]="{'background-color': this.getBackgroundColor(row.mon6?.vacationingMembers)}">
+            {{row.mon6?.displayText}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -82,4 +82,26 @@ export class MainTableComponent implements AfterViewInit {
     console.log(day?.date.toDateString());
     return result;
   }
+
+  getTooltip(day: DayData): string{
+    var result = day?.holiday ?? "";
+
+    if(day?.vacationingMembers) {
+      for (var d = 0; d < day.vacationingMembers?.length; d++) {
+        result += "  " + day.vacationingMembers[d].name + " on vacation"
+      }
+    }
+    return result;
+  }
+
+  getBackgroundColor(members: TeamMember[]): string {
+    if(!members || members.length == 0)
+      return ""
+
+    if (members.length == 1){
+      return members[0].color
+    }
+
+    return "yellow";
+  }
 }

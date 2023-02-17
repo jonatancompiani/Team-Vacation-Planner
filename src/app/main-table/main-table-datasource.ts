@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Holiday, HolidayDataSource } from './holiday-datasource';
-import { TeamMember } from './team-member-datasource';
+import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
 
 export interface MainTableItem {
   id: number;
@@ -68,10 +68,12 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
   sort: MatSort | undefined;
  
   holidays: Holiday[];
+  teamMembers: TeamMember[];
 
   constructor() {
     super();
     this.holidays = new HolidayDataSource().data;
+    this.teamMembers = new TeamMemberDataSource().data;
   }
 
   /**
@@ -118,7 +120,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
 
       if (!monthToAdd) continue; // will never hit, here just for the interpreter
 
-      var dayData: DayData = {date: new Date(d), displayText: d.getDate().toString(), holiday: this.getHoliday(d), vacationingMembers: undefined }
+      var dayData: DayData = {date: new Date(d), displayText: d.getDate().toString(), holiday: this.getHoliday(d), vacationingMembers: this.getVacationingTeamMembers(d) }
 
       // sets the day (cell) value
       monthToAdd[propName as keyof MainTableItem] = dayData as never;
@@ -130,6 +132,10 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
     }
 
     return data;
+  }
+
+  getVacationingTeamMembers(date: Date): TeamMember[] | undefined {    
+    return this.teamMembers.filter((member)=> member.vacations.filter((vacation)=> vacation.getTime() == date.getTime()).length > 0);
   }
 
   private getHoliday(date: Date): string | undefined{
