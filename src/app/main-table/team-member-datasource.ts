@@ -20,14 +20,14 @@ const COLORS = [
 
 export class TeamMemberDataSource{
   data: TeamMember[] = [
-    {id: 1, name: "Shiba Inu",  color: COLORS[0], vacations: [new Date(2023,0,1 )], pictureUrl: "https://material.angular.io/assets/img/examples/shiba1.jpg"},
-    {id: 2, name: "Calm Cat",   color: COLORS[1], vacations: [new Date(2023,2,7 )], pictureUrl: "https://http.cat/420"},
-    {id: 3, name: "Tobi",       color: COLORS[2], vacations: [new Date(2023,2,8 )], pictureUrl: "https://http.cat/103"},
-    {id: 4, name: "Potatoes",   color: COLORS[3], vacations: [new Date(2023,2,9 )], pictureUrl: "https://http.cat/207"},
-    {id: 5, name: "Test",       color: COLORS[4], vacations: [new Date(2023,2,10)], pictureUrl: "https://http.cat/500"},
-    {id: 5, name: "something",  color: COLORS[5], vacations: [new Date(2023,2,13)], pictureUrl: "https://http.cat/500"},
-    {id: 5, name: "aaaa",       color: COLORS[6], vacations: [new Date(2023,2,14)], pictureUrl: "https://http.cat/500"},
-    {id: 5, name: "aaaa",       color: COLORS[7], vacations: [new Date(2023,2,15)], pictureUrl: "https://http.cat/500"},
-    {id: 5, name: "aaaa",       color: COLORS[8], vacations: [new Date(2023,2,16)], pictureUrl: "https://http.cat/500"}
+    {id: 1, name: "Tsubasa",  color: COLORS[0], pictureUrl: "https://http.cat/404", vacations: [new Date(2023,0,1 )] },
+    {id: 2, name: "Calm Cat", color: COLORS[1], pictureUrl: "https://http.cat/420", vacations: [new Date(2023,2,8 )] },
+    {id: 3, name: "Alphonse", color: COLORS[2], pictureUrl: "https://http.cat/103", vacations: [new Date(2023,2,8 )] },
+    {id: 4, name: "Sakura",   color: COLORS[3], pictureUrl: "https://http.cat/207", vacations: [new Date(2023,2,9 )] },
+    {id: 5, name: "Rick",     color: COLORS[4], pictureUrl: "https://http.cat/500", vacations: [new Date(2023,2,10)] },
+    {id: 5, name: "Lelouch",  color: COLORS[5], pictureUrl: "https://http.cat/500", vacations: [new Date(2023,2,13)] },
+    {id: 5, name: "Batman",   color: COLORS[6], pictureUrl: "https://http.cat/500", vacations: [new Date(2023,2,14)] },
+    {id: 5, name: "Naruto",   color: COLORS[7], pictureUrl: "https://http.cat/500", vacations: [new Date(2023,2,15)] },
+    {id: 5, name: "Goku",     color: COLORS[8], pictureUrl: "https://http.cat/500", vacations: [new Date(2023,9,1), new Date(2023,2,8 )] }
   ];
 }

@@ -10,12 +10,13 @@ import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
   styleUrls: ['./main-table.component.sass']
 })
 export class MainTableComponent implements AfterViewInit {
-  @ViewChild(MatTable) table!: MatTable<MainTableItem>;
-  @ViewChild(MatTable) teamMembers!: TeamMember[] | undefined;
-  @ViewChild(MatTable) holidays!: Holiday[] | undefined;
+  @ViewChild(MatTable) table!: MatTable<MainTableItem>;  
   dataSource: MainTableDataSource;
   teamMembersDataSource: TeamMemberDataSource;
   holidaysDataSource: HolidayDataSource;
+
+  selectedMemberColor: string = "transparent";
+  selectedMember: TeamMember | undefined;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -66,12 +67,9 @@ export class MainTableComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.table.dataSource = this.dataSource;
-    this.teamMembers = this.teamMembersDataSource.data;
-    this.holidays = this.holidaysDataSource.data;
   }
 
-  getCellClasses(day: DayData): string{
+  getCellClasses(day: DayData): string {
     var now = new Date();
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -79,29 +77,50 @@ export class MainTableComponent implements AfterViewInit {
     result += day?.holiday ? " holiday" : "";
     result += day?.date.getTime() == today.getTime() ? " today" : "";
     result += day?.date.getTime() < today.getTime() ? " pastdate" : "";
-    console.log(day?.date.toDateString());
+
     return result;
   }
 
-  getTooltip(day: DayData): string{
+  getTooltip(day: DayData): string {
     var result = day?.holiday ?? "";
 
-    if(day?.vacationingMembers) {
+    if (day?.vacationingMembers) {
       for (var d = 0; d < day.vacationingMembers?.length; d++) {
-        result += "  " + day.vacationingMembers[d].name + " on vacation"
+        result += " - " + day.vacationingMembers[d].name + " on vacation"
       }
     }
     return result;
   }
 
   getBackgroundColor(members: TeamMember[]): string {
-    if(!members || members.length == 0)
+    if (!members || members.length == 0)
       return ""
 
-    if (members.length == 1){
+    if (members.length == 1) {
       return members[0].color
     }
 
-    return "yellow";
+    var startGrad = 0;
+    var step = 100 /members.length;    
+    var gradient = "linear-gradient(45deg"
+    for (var i = 0; i < members.length; i++) {
+      gradient += ", " + members[i].color + " "+ startGrad + "% "+ (startGrad + step) + "% ";
+      startGrad += step;
+    }
+    gradient += ")"
+
+    return gradient;
+  }
+
+  selectTeamMember(member: TeamMember) {
+    
+    this.selectedMemberColor = this.selectedMemberColor == member.color ? "transparent" : member.color
+
+    if(this.selectedMember?.id == member.id){
+      this.dataSource.selectMember(undefined);
+    }else{
+      this.dataSource.selectMember(member);
+    }
+
   }
 }

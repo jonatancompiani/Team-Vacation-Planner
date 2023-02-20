@@ -63,12 +63,13 @@ const MONTHS: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"
  * (including sorting, pagination, and filtering).
  */
 export class MainTableDataSource extends DataSource<MainTableItem> {
-  data: MainTableItem[] | undefined;
+  data: MainTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
  
   holidays: Holiday[];
   teamMembers: TeamMember[];
+  selectedTeamMember: TeamMember | undefined;
 
   constructor() {
     super();
@@ -84,7 +85,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
   connect(): Observable<MainTableItem[]> {
     return merge(observableOf(this.data))
       .pipe(map(() => {
-        return this.getDates();
+        return this.getDates(this.selectedTeamMember);
       }));
   }
 
@@ -94,8 +95,14 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
    */
   disconnect(): void { }
 
+  selectMember(member?: TeamMember){  
+    //this.data?.splice(0);
+    this.data.push({ id: 50, month: "aaaaaaa", sun1: undefined, mon1: undefined, tue1: undefined, wed1: undefined, thu1: undefined, fri1: undefined, sat1: undefined, sun2: undefined, mon2: undefined, tue2: undefined, wed2: undefined, thu2: undefined, fri2: undefined, sat2: undefined, sun3: undefined, mon3: undefined, tue3: undefined, wed3: undefined, thu3: undefined, fri3: undefined, sat3: undefined, sun4: undefined, mon4: undefined, tue4: undefined, wed4: undefined, thu4: undefined, fri4: undefined, sat4: undefined, sun5: undefined, mon5: undefined, tue5: undefined, wed5: undefined, thu5: undefined, fri5: undefined, sat5: undefined, sun6: undefined, mon6: undefined });
+    //this.data = this.getDates(member);
+  }
 
-  private getDates() {
+
+  getDates(member?: TeamMember) : MainTableItem[] {
     var data: MainTableItem[] = [];
     var propNames: string[] = this.getPropertyNames();
 
@@ -120,7 +127,7 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
 
       if (!monthToAdd) continue; // will never hit, here just for the interpreter
 
-      var dayData: DayData = {date: new Date(d), displayText: d.getDate().toString(), holiday: this.getHoliday(d), vacationingMembers: this.getVacationingTeamMembers(d) }
+      var dayData: DayData = {date: new Date(d), displayText: d.getDate().toString(), holiday: this.getHoliday(d), vacationingMembers: this.getVacationingTeamMembers(d, member) }
 
       // sets the day (cell) value
       monthToAdd[propName as keyof MainTableItem] = dayData as never;
@@ -134,8 +141,8 @@ export class MainTableDataSource extends DataSource<MainTableItem> {
     return data;
   }
 
-  getVacationingTeamMembers(date: Date): TeamMember[] | undefined {    
-    return this.teamMembers.filter((member)=> member.vacations.filter((vacation)=> vacation.getTime() == date.getTime()).length > 0);
+  getVacationingTeamMembers(date: Date, memberFilter?: TeamMember): TeamMember[] | undefined {    
+    return this.teamMembers.filter((member)=> (!memberFilter || member.id == memberFilter?.id) && member.vacations.filter((vacation)=> vacation.getTime() == date.getTime()).length > 0);
   }
 
   private getHoliday(date: Date): string | undefined{
