@@ -27,7 +27,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sun1)"
             [matTooltip]="getTooltip(row.sun1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sun1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sun1?.vacationingMembers)}"
+            (click)="toggleEvent(row.sun1)">
             {{row.sun1?.displayText}}</td>
         </ng-container>
 
@@ -36,7 +37,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.mon1)"
             [matTooltip]="getTooltip(row.mon1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.mon1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.mon1?.vacationingMembers)}"
+            (click)="toggleEvent(row.mon1)">
             {{row.mon1?.displayText}}</td>
         </ng-container>
 
@@ -45,7 +47,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.tue1)"
             [matTooltip]="getTooltip(row.tue1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.tue1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.tue1?.vacationingMembers)}"
+            (click)="toggleEvent(row.tue1)">
             {{row.tue1?.displayText}}</td>
         </ng-container>
 
@@ -54,7 +57,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.wed1)"
             [matTooltip]="getTooltip(row.wed1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.wed1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.wed1?.vacationingMembers)}"
+            (click)="toggleEvent(row.wed1)">
             {{row.wed1?.displayText}}</td>
         </ng-container>
 
@@ -63,7 +67,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.thu1)"
             [matTooltip]="getTooltip(row.thu1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.thu1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.thu1?.vacationingMembers)}"
+            (click)="toggleEvent(row.thu1)">
             {{row.thu1?.displayText}}</td>
         </ng-container>
 
@@ -72,7 +77,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.fri1)"
             [matTooltip]="getTooltip(row.fri1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.fri1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.fri1?.vacationingMembers)}"
+            (click)="toggleEvent(row.fri1)">
             {{row.fri1?.displayText}}</td>
         </ng-container>
 
@@ -81,7 +87,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sat1)"
             [matTooltip]="getTooltip(row.sat1)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sat1?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sat1?.vacationingMembers)}"
+            (click)="toggleEvent(row.sat1)">
             {{row.sat1?.displayText}}</td>
         </ng-container>
 
@@ -90,7 +97,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sun2)"
             [matTooltip]="getTooltip(row.sun2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sun2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sun2?.vacationingMembers)}"
+            (click)="toggleEvent(row.sun2)">
             {{row.sun2?.displayText}}</td>
         </ng-container>
 
@@ -99,7 +107,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.mon2)"
             [matTooltip]="getTooltip(row.mon2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.mon2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.mon2?.vacationingMembers)}"
+            (click)="toggleEvent(row.mon2)">
             {{row.mon2?.displayText}}</td>
         </ng-container>
 
@@ -108,7 +117,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.tue2)"
             [matTooltip]="getTooltip(row.tue2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.tue2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.tue2?.vacationingMembers)}"
+            (click)="toggleEvent(row.tue2)">
             {{row.tue2?.displayText}}</td>
         </ng-container>
 
@@ -117,7 +127,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.wed2)"
             [matTooltip]="getTooltip(row.wed2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.wed2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.wed2?.vacationingMembers)}"
+            (click)="toggleEvent(row.wed2)">
             {{row.wed2?.displayText}}</td>
         </ng-container>
 
@@ -126,7 +137,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.thu2)"
             [matTooltip]="getTooltip(row.thu2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.thu2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.thu2?.vacationingMembers)}"
+            (click)="toggleEvent(row.thu2)">
             {{row.thu2?.displayText}}</td>
         </ng-container>
 
@@ -135,7 +147,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.fri2)"
             [matTooltip]="getTooltip(row.fri2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.fri2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.fri2?.vacationingMembers)}"
+            (click)="toggleEvent(row.fri2)">
             {{row.fri2?.displayText}}</td>
         </ng-container>
 
@@ -144,7 +157,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sat2)"
             [matTooltip]="getTooltip(row.sat2)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sat2?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sat2?.vacationingMembers)}"
+            (click)="toggleEvent(row.sat2)">
             {{row.sat2?.displayText}}</td>
         </ng-container>
 
@@ -153,7 +167,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sun3)"
             [matTooltip]="getTooltip(row.sun3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sun3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sun3?.vacationingMembers)}"
+            (click)="toggleEvent(row.sun3)">
             {{row.sun3?.displayText}}</td>
         </ng-container>
 
@@ -162,7 +177,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.mon3)"
             [matTooltip]="getTooltip(row.mon3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.mon3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.mon3?.vacationingMembers)}"
+            (click)="toggleEvent(row.mon3)">
             {{row.mon3?.displayText}}</td>
         </ng-container>
 
@@ -171,7 +187,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.tue3)"
             [matTooltip]="getTooltip(row.tue3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.tue3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.tue3?.vacationingMembers)}"
+            (click)="toggleEvent(row.tue3)">
             {{row.tue3?.displayText}}</td>
         </ng-container>
 
@@ -180,7 +197,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.wed3)"
             [matTooltip]="getTooltip(row.wed3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.wed3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.wed3?.vacationingMembers)}"
+            (click)="toggleEvent(row.wed3)">
             {{row.wed3?.displayText}}</td>
         </ng-container>
 
@@ -189,7 +207,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.thu3)"
             [matTooltip]="getTooltip(row.thu3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.thu3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.thu3?.vacationingMembers)}"
+            (click)="toggleEvent(row.thu3)">
             {{row.thu3?.displayText}}</td>
         </ng-container>
 
@@ -198,7 +217,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.fri3)"
             [matTooltip]="getTooltip(row.fri3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.fri3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.fri3?.vacationingMembers)}"
+            (click)="toggleEvent(row.fri3)">
             {{row.fri3?.displayText}}</td>
         </ng-container>
 
@@ -207,7 +227,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sat3)"
             [matTooltip]="getTooltip(row.sat3)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sat3?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sat3?.vacationingMembers)}"
+            (click)="toggleEvent(row.sat3)">
             {{row.sat3?.displayText}}</td>
         </ng-container>
 
@@ -216,7 +237,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sun4)"
             [matTooltip]="getTooltip(row.sun4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sun4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sun4?.vacationingMembers)}"
+            (click)="toggleEvent(row.sun4)">
             {{row.sun4?.displayText}}</td>
         </ng-container>
 
@@ -225,7 +247,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.mon4)"
             [matTooltip]="getTooltip(row.mon4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.mon4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.mon4?.vacationingMembers)}"
+            (click)="toggleEvent(row.mon4)">
             {{row.mon4?.displayText}}</td>
         </ng-container>
 
@@ -234,7 +257,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.tue4)"
             [matTooltip]="getTooltip(row.tue4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.tue4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.tue4?.vacationingMembers)}"
+            (click)="toggleEvent(row.tue4)">
             {{row.tue4?.displayText}}</td>
         </ng-container>
 
@@ -243,7 +267,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.wed4)"
             [matTooltip]="getTooltip(row.wed4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.wed4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.wed4?.vacationingMembers)}"
+            (click)="toggleEvent(row.wed4)">
             {{row.wed4?.displayText}}</td>
         </ng-container>
 
@@ -252,7 +277,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.thu4)"
             [matTooltip]="getTooltip(row.thu4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.thu4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.thu4?.vacationingMembers)}"
+            (click)="toggleEvent(row.thu4)">
             {{row.thu4?.displayText}}</td>
         </ng-container>
 
@@ -261,7 +287,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.fri4)"
             [matTooltip]="getTooltip(row.fri4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.fri4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.fri4?.vacationingMembers)}"
+            (click)="toggleEvent(row.fri4)">
             {{row.fri4?.displayText}}</td>
         </ng-container>
 
@@ -270,7 +297,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sat4)"
             [matTooltip]="getTooltip(row.sat4)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sat4?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sat4?.vacationingMembers)}"
+            (click)="toggleEvent(row.sat4)">
             {{row.sat4?.displayText}}</td>
         </ng-container>
 
@@ -279,7 +307,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sun5)"
             [matTooltip]="getTooltip(row.sun5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sun5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sun5?.vacationingMembers)}"
+            (click)="toggleEvent(row.sun5)">
             {{row.sun5?.displayText}}</td>
         </ng-container>
 
@@ -288,7 +317,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.mon5)"
             [matTooltip]="getTooltip(row.mon5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.mon5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.mon5?.vacationingMembers)}"
+            (click)="toggleEvent(row.mon5)">
             {{row.mon5?.displayText}}</td>
         </ng-container>
 
@@ -297,7 +327,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.tue5)"
             [matTooltip]="getTooltip(row.tue5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.tue5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.tue5?.vacationingMembers)}"
+            (click)="toggleEvent(row.tue5)">
             {{row.tue5?.displayText}}</td>
         </ng-container>
 
@@ -306,7 +337,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.wed5)"
             [matTooltip]="getTooltip(row.wed5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.wed5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.wed5?.vacationingMembers)}"
+            (click)="toggleEvent(row.wed5)">
             {{row.wed5?.displayText}}</td>
         </ng-container>
 
@@ -315,7 +347,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.thu5)"
             [matTooltip]="getTooltip(row.thu5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.thu5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.thu5?.vacationingMembers)}"
+            (click)="toggleEvent(row.thu5)">
             {{row.thu5?.displayText}}</td>
         </ng-container>
 
@@ -324,7 +357,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.fri5)"
             [matTooltip]="getTooltip(row.fri5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.fri5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.fri5?.vacationingMembers)}"
+            (click)="toggleEvent(row.fri5)">
             {{row.fri5?.displayText}}</td>
         </ng-container>
 
@@ -333,7 +367,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sat5)"
             [matTooltip]="getTooltip(row.sat5)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sat5?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sat5?.vacationingMembers)}"
+            (click)="toggleEvent(row.sat5)">
             {{row.sat5?.displayText}}</td>
         </ng-container>
 
@@ -342,7 +377,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.sun6)"
             [matTooltip]="getTooltip(row.sun6)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.sun6?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.sun6?.vacationingMembers)}"
+            (click)="toggleEvent(row.sun6)">
             {{row.sun6?.displayText}}</td>
         </ng-container>
 
@@ -351,7 +387,8 @@
           <td mat-cell *matCellDef="let row" 
 						[ngClass]="this.getCellClasses(row.mon6)"
             [matTooltip]="getTooltip(row.mon6)"
-            [ngStyle]="{'background': this.getBackgroundColor(row.mon6?.vacationingMembers)}">
+            [ngStyle]="{'background': this.getBackgroundColor(row.mon6?.vacationingMembers)}"
+            (click)="toggleEvent(row.mon6)">
             {{row.mon6?.displayText}}</td>
         </ng-container>
 

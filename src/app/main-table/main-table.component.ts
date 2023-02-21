@@ -10,10 +10,8 @@ import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
   styleUrls: ['./main-table.component.sass']
 })
 export class MainTableComponent implements AfterViewInit {
-  @ViewChild(MatTable) table!: MatTable<MainTableItem>;  
+  @ViewChild(MatTable) table!: MatTable<MainTableItem>;
   dataSource: MainTableDataSource;
-  teamMembersDataSource: TeamMemberDataSource;
-  holidaysDataSource: HolidayDataSource;
 
   selectedMemberColor: string = "transparent";
   selectedMember: TeamMember | undefined;
@@ -62,8 +60,6 @@ export class MainTableComponent implements AfterViewInit {
 
   constructor() {
     this.dataSource = new MainTableDataSource();
-    this.teamMembersDataSource = new TeamMemberDataSource();
-    this.holidaysDataSource = new HolidayDataSource();
   }
 
   ngAfterViewInit(): void {
@@ -101,10 +97,10 @@ export class MainTableComponent implements AfterViewInit {
     }
 
     var startGrad = 0;
-    var step = 100 /members.length;    
+    var step = 100 / members.length;
     var gradient = "linear-gradient(45deg"
     for (var i = 0; i < members.length; i++) {
-      gradient += ", " + members[i].color + " "+ startGrad + "% "+ (startGrad + step) + "% ";
+      gradient += ", " + members[i].color + " " + startGrad + "% " + (startGrad + step) + "% ";
       startGrad += step;
     }
     gradient += ")"
@@ -113,15 +109,29 @@ export class MainTableComponent implements AfterViewInit {
   }
 
   selectTeamMember(member: TeamMember) {
-    
+
     this.selectedMemberColor = this.selectedMemberColor == member.color ? "transparent" : member.color
 
-    if(this.selectedMember?.id == member.id){
+    if (this.selectedMember?.id == member.id) {
       this.dataSource.selectMember(undefined);
       this.selectedMember = undefined;
-    }else{
+    } else {
       this.dataSource.selectMember(member);
       this.selectedMember = member;
+    }
+  }
+
+  toggleEvent(day: DayData) {
+    if(!!this.selectedMember){
+
+      var existingMemberIndex = day.vacationingMembers?.findIndex((x)=> x.id == this.selectedMember?.id);
+
+      if(existingMemberIndex == -1 || existingMemberIndex == undefined){
+        day.vacationingMembers?.push(this.selectedMember);
+      }
+      else{
+        day.vacationingMembers?.splice(existingMemberIndex, 1);
+      }
     }
   }
 }
