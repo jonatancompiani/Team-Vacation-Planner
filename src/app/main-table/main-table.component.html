@@ -1,9 +1,9 @@
 
-<mat-grid-list cols="1" rowHeight="3rem">
-    
-  <mat-grid-tile rowspan="2" >
+<mat-grid-list cols="1" rowHeight="1rem">
+   
+  <mat-grid-tile rowspan="7" >
       <mat-chip-listbox >
-        <mat-chip-option *ngFor="let member of teamMembersDataSource.data" 
+        <mat-chip-option *ngFor="let member of dataSource.teamMembers" 
           [ngStyle]="{'background': member.color}"
           (click)="selectTeamMember(member)">
           <img matChipAvatar [src]="member.pictureUrl" />
@@ -12,11 +12,11 @@
       </mat-chip-listbox>
   </mat-grid-tile>
 
-  <mat-grid-tile rowspan="16">
+  <mat-grid-tile rowspan="39">
     <section class="mat-elevation-z8" tabindex="0" 
       [ngStyle]="{'border': '5px solid ' + selectedMemberColor}">
 
-      <table mat-table [dataSource]="dataSource">
+      <table mat-table [dataSource]="dataSource.data">
         <ng-container matColumnDef="month" sticky>
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">{{row.month}}</td>

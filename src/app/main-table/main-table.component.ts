@@ -118,9 +118,10 @@ export class MainTableComponent implements AfterViewInit {
 
     if(this.selectedMember?.id == member.id){
       this.dataSource.selectMember(undefined);
+      this.selectedMember = undefined;
     }else{
       this.dataSource.selectMember(member);
+      this.selectedMember = member;
     }
-
   }
 }
