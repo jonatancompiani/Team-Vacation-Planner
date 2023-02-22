@@ -124,14 +124,19 @@ export class MainTableComponent implements AfterViewInit {
   toggleEvent(day: DayData) {
     if(!!this.selectedMember){
 
-      var existingMemberIndex = day.vacationingMembers?.findIndex((x)=> x.id == this.selectedMember?.id);
+      var memberIndex = this.dataSource.teamMembers.findIndex(x=> x.id == this.selectedMember?.id);
+      
+      var vacationIndex = this.dataSource.teamMembers[memberIndex].vacations.findIndex(x=> x.getTime() == day.date.getTime())
+      if(vacationIndex == -1)
+      {
+        this.dataSource.teamMembers[memberIndex].vacations.push(day.date);
+      }
+      else
+      {
+        this.dataSource.teamMembers[memberIndex].vacations.splice(vacationIndex, 1);
+      }
 
-      if(existingMemberIndex == -1 || existingMemberIndex == undefined){
-        day.vacationingMembers?.push(this.selectedMember);
-      }
-      else{
-        day.vacationingMembers?.splice(existingMemberIndex, 1);
-      }
+      this.dataSource.selectMember(this.selectedMember);
     }
   }
 }
