@@ -18,6 +18,8 @@ export class HolidayDataSource{
     {country: "PT", date: new Date(2023, 10, 1 ), description: "All Saints' Day"},
     {country: "PT", date: new Date(2023, 11, 1 ), description: "Restoration of Independence"},
     {country: "PT", date: new Date(2023, 11, 8 ), description: "Feast of the Immaculate Conception"},
-    {country: "PT", date: new Date(2023, 11, 25), description: "Christmas Day"}
+    {country: "PT", date: new Date(2023, 11, 25), description: "Christmas Day"},
+
+    {country: "PT", date: new Date(2023, 5, 13), description: "[Lisboa] Dia de Santo António"}
   ];
 }
