@@ -17,6 +17,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips'
+import { firebaseConfig } from "../environments/environment";
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';        
+
 
 @NgModule({
   declarations: [
@@ -39,7 +43,9 @@ import { MatChipsModule } from '@angular/material/chips'
     MatListModule,
     MatGridListModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

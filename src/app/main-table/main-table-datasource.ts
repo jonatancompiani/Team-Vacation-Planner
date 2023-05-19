@@ -1,10 +1,13 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import { Holiday, HolidayDataSource } from './holiday-datasource';
-import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
+import { TeamMember } from "../models/TeamMember";
+import { Holiday } from '../models/Holiday';
+import { TeamMemberService } from '../services/teamMember.service';
+import { HolidayService } from '../services/holiday.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
 
 export interface MainTableItem {
   id: number;
@@ -62,20 +65,69 @@ const MONTHS: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class MainTableDataSource
 {
   data: MainTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
  
-  holidays: Holiday[];
-  teamMembers: TeamMember[];
+  holidays: Holiday[] = [];
+  teamMembers: TeamMember[] = [];
   selectedTeamMember: TeamMember | undefined;
 
-  constructor() {
-    this.holidays = new HolidayDataSource().data;
-    this.teamMembers = new TeamMemberDataSource().data;
-    this.data = this.getDates();
+  constructor
+  (
+    holidayService: HolidayService,
+    teamMemberService: TeamMemberService
+  ) 
+  {
+    // holidayService.getAll()
+    // .snapshotChanges()
+    // .subscribe((data: any) => {
+    //   data.forEach((element: Holiday) => {
+    //     this.holidays.push(element);
+    //   });
+    //   //this.holidays = data;
+    // });
+
+    // teamMemberService.getAll()
+    // .snapshotChanges()
+    // .subscribe((data: any) => {
+    //   data.forEach((element: TeamMember) => {
+    //     this.teamMembers.push(element);
+    //     alert(JSON.stringify(element));
+    //   });
+    //   //this.teamMembers = data;
+    // });
+
+    holidayService.getAll().valueChanges().subscribe((data: Holiday[])=> {
+      this.holidays = Array.prototype.map.call(data, (item: Holiday) => {
+        var h = new Holiday();
+        h.description = item.description;
+        h.country = item.country;
+        h.date = (item.date as any).toDate();
+
+        return h;
+      }) as Holiday[];
+    })
+
+
+    teamMemberService.getAll().valueChanges().subscribe((data: TeamMember[])=> {
+      this.teamMembers = Array.prototype.map.call(data, (item: TeamMember) => {
+        var t = new TeamMember();
+        t.name = item.name;
+        t.color = item.color;
+        t.pictureUrl = item.pictureUrl;
+        t.vacations = [];
+        item.vacations.forEach((vacation)=> t.vacations.push((vacation as any).toDate()));
+        return t;
+      }) as TeamMember[];
+
+      this.data = this.getDates();
+    })
   }
 
   selectMember(member?: TeamMember){  
@@ -124,11 +176,11 @@ export class MainTableDataSource
   }
 
   getVacationingTeamMembers(date: Date, memberFilter?: TeamMember): TeamMember[] | undefined {    
-    return this.teamMembers.filter((member)=> (!memberFilter || member.id == memberFilter?.id) && member.vacations.filter((vacation)=> vacation.getTime() == date.getTime()).length > 0);
+    return this.teamMembers.filter((member)=> (!memberFilter || member.id == memberFilter?.id) && member.vacations.filter((vacation)=> vacation?.getTime() == date?.getTime()).length > 0);
   }
 
   private getHoliday(date: Date): string | undefined{
-    var filteredHolidays = this.holidays.filter((h)=> h.date.getTime() == date.getTime());
+    var filteredHolidays = this.holidays.filter((h)=> h.date?.getTime() == date?.getTime());
     return  filteredHolidays.length > 0 ? filteredHolidays[0].description : undefined
   }
 

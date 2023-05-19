@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { Holiday, HolidayDataSource } from './holiday-datasource';
 import { DayData, MainTableDataSource, MainTableItem } from './main-table-datasource';
-import { TeamMember, TeamMemberDataSource } from './team-member-datasource';
+import { TeamMember } from "../models/TeamMember";
+
 
 @Component({
   selector: 'app-main-table',
@@ -58,8 +58,8 @@ export class MainTableComponent implements AfterViewInit {
     'mon6'
   ];
 
-  constructor() {
-    this.dataSource = new MainTableDataSource();
+  constructor(private ds: MainTableDataSource) {
+    this.dataSource = ds;
   }
 
   ngAfterViewInit(): void {
@@ -124,19 +124,21 @@ export class MainTableComponent implements AfterViewInit {
   toggleEvent(day: DayData) {
     if(!!this.selectedMember){
 
-      var memberIndex = this.dataSource.teamMembers.findIndex(x=> x.id == this.selectedMember?.id);
-      
-      var vacationIndex = this.dataSource.teamMembers[memberIndex].vacations.findIndex(x=> x.getTime() == day.date.getTime())
-      if(vacationIndex == -1)
-      {
-        this.dataSource.teamMembers[memberIndex].vacations.push(day.date);
-      }
-      else
-      {
-        this.dataSource.teamMembers[memberIndex].vacations.splice(vacationIndex, 1);
-      }
+      //TODO: Save Data in the DB (create vacation)
 
-      this.dataSource.selectMember(this.selectedMember);
+      // var memberIndex = this.dataSource.teamMembers.findIndex(x=> x.id == this.selectedMember?.id);
+      
+      // var vacationIndex = this.dataSource.teamMembers[memberIndex].vacations.findIndex(x=> x.getTime() == day.date.getTime())
+      // if(vacationIndex == -1)
+      // {
+      //   this.dataSource.teamMembers[memberIndex].vacations.push(day.date);
+      // }
+      // else
+      // {
+      //   this.dataSource.teamMembers[memberIndex].vacations.splice(vacationIndex, 1);
+      // }
+
+      // this.dataSource.selectMember(this.selectedMember);
     }
   }
 }
