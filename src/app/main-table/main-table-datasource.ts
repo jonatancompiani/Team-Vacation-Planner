@@ -78,32 +78,20 @@ export class MainTableDataSource
   teamMembers: TeamMember[] = [];
   selectedTeamMember: TeamMember | undefined;
 
+  holidayService: HolidayService;
+  teamMemberService: TeamMemberService;
+  
   constructor
   (
     holidayService: HolidayService,
     teamMemberService: TeamMemberService
-  ) 
+  )
   {
-    // holidayService.getAll()
-    // .snapshotChanges()
-    // .subscribe((data: any) => {
-    //   data.forEach((element: Holiday) => {
-    //     this.holidays.push(element);
-    //   });
-    //   //this.holidays = data;
-    // });
 
-    // teamMemberService.getAll()
-    // .snapshotChanges()
-    // .subscribe((data: any) => {
-    //   data.forEach((element: TeamMember) => {
-    //     this.teamMembers.push(element);
-    //     alert(JSON.stringify(element));
-    //   });
-    //   //this.teamMembers = data;
-    // });
-
-    holidayService.getAll().valueChanges().subscribe((data: Holiday[])=> {
+    this.holidayService = holidayService;
+    this.teamMemberService = teamMemberService;
+ 
+    this.holidayService.getAll().valueChanges().subscribe((data: Holiday[])=> {
       this.holidays = Array.prototype.map.call(data, (item: Holiday) => {
         var h = new Holiday();
         h.description = item.description;
@@ -114,10 +102,11 @@ export class MainTableDataSource
       }) as Holiday[];
     })
 
-
-    teamMemberService.getAll().valueChanges().subscribe((data: TeamMember[])=> {
+    this.teamMemberService.getAll().valueChanges().subscribe((data: TeamMember[])=> {
       this.teamMembers = Array.prototype.map.call(data, (item: TeamMember) => {
         var t = new TeamMember();
+        t.id = item.id;
+        t.code = item.code;
         t.name = item.name;
         t.color = item.color;
         t.pictureUrl = item.pictureUrl;
@@ -130,7 +119,7 @@ export class MainTableDataSource
     })
   }
 
-  selectMember(member?: TeamMember){  
+  selectMember(member?: TeamMember){
     this.data?.splice(0);
     this.data = this.getDates(member);
   }
@@ -176,11 +165,17 @@ export class MainTableDataSource
   }
 
   getVacationingTeamMembers(date: Date, memberFilter?: TeamMember): TeamMember[] | undefined {    
-    return this.teamMembers.filter((member)=> (!memberFilter || member.id == memberFilter?.id) && member.vacations.filter((vacation)=> vacation?.getTime() == date?.getTime()).length > 0);
+    return this.teamMembers.filter((member)=> (!memberFilter || member.code == memberFilter?.code) 
+            && member.vacations.filter((vacation)=> this.areDatesEqual(vacation, date)).length > 0);
+  }
+
+  addVacation(date: Date, member: TeamMember){
+    member.vacations.push(date);
+    this.teamMemberService.update(member);
   }
 
   private getHoliday(date: Date): string | undefined{
-    var filteredHolidays = this.holidays.filter((h)=> h.date?.getTime() == date?.getTime());
+    var filteredHolidays = this.holidays.filter((h)=> this.areDatesEqual(h.date, date));
     return  filteredHolidays.length > 0 ? filteredHolidays[0].description : undefined
   }
 
@@ -199,5 +194,9 @@ export class MainTableDataSource
     var propNames = ["sun1", "mon1", "tue1", "wed1", "thu1", "fri1", "sat1"];
 
     return propNames[date.getDay()] as keyof MainTableItem;
+  }
+
+  private areDatesEqual(date1: Date, date2: Date): boolean {
+    return date1?.getFullYear() == date2?.getFullYear() && date1?.getMonth() == date2?.getMonth() && date1?.getDate() == date2?.getDate();
   }
 }
