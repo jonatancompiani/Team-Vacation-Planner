@@ -112,7 +112,7 @@ export class MainTableComponent implements AfterViewInit {
 
     this.selectedMemberColor = this.selectedMemberColor == member.color ? "transparent" : member.color
 
-    if (this.selectedMember?.id == member.id) {
+    if (this.selectedMember?.code == member.code) {
       this.dataSource.selectMember(undefined);
       this.selectedMember = undefined;
     } else {
@@ -124,6 +124,7 @@ export class MainTableComponent implements AfterViewInit {
   toggleEvent(day: DayData) {
     if(!!this.selectedMember){
 
+      this.ds.addVacation(day.date, this.selectedMember);
       //TODO: Save Data in the DB (create vacation)
 
       // var memberIndex = this.dataSource.teamMembers.findIndex(x=> x.id == this.selectedMember?.id);

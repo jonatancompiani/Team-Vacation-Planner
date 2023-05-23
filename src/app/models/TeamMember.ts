@@ -1,5 +1,6 @@
 export class TeamMember {
-    id!: number;
+    id!: string;
+    code!: string;
     name!: string;
     color!: string;
     pictureUrl!: string;
