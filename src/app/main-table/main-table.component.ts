@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { DayData, MainTableDataSource, MainTableItem } from './main-table-datasource';
-import { TeamMember } from "../models/TeamMember";
-
 
 @Component({
   selector: 'app-main-table',
@@ -12,9 +10,6 @@ import { TeamMember } from "../models/TeamMember";
 export class MainTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<MainTableItem>;
   dataSource: MainTableDataSource;
-
-  selectedMemberColor: string = "transparent";
-  selectedMember: TeamMember | undefined;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -82,25 +77,25 @@ export class MainTableComponent implements AfterViewInit {
 
     if (day?.vacationingMembers) {
       for (var d = 0; d < day.vacationingMembers?.length; d++) {
-        result += " - " + day.vacationingMembers[d].name + " on vacation"
+        result += " - " + day.vacationingMembers[d].payload.doc.data().name + " on vacation"
       }
     }
     return result;
   }
 
-  getBackgroundColor(members: TeamMember[]): string {
+  getBackgroundColor(members: any[]): string {
     if (!members || members.length == 0)
       return ""
 
     if (members.length == 1) {
-      return members[0].color
+      return members[0].payload.doc.data().color
     }
 
     var startGrad = 0;
     var step = 100 / members.length;
     var gradient = "linear-gradient(45deg"
     for (var i = 0; i < members.length; i++) {
-      gradient += ", " + members[i].color + " " + startGrad + "% " + (startGrad + step) + "% ";
+      gradient += ", " + members[i].payload.doc.data().color + " " + startGrad + "% " + (startGrad + step) + "% ";
       startGrad += step;
     }
     gradient += ")"
@@ -108,38 +103,27 @@ export class MainTableComponent implements AfterViewInit {
     return gradient;
   }
 
-  selectTeamMember(member: TeamMember) {
+  selectTeamMember(member: any, id: string) {
 
-    this.selectedMemberColor = this.selectedMemberColor == member.color ? "transparent" : member.color
+    this.dataSource.selectedMemberColor = this.dataSource.selectedMemberColor == member.color ? "transparent" : member.color
 
-    if (this.selectedMember?.code == member.code) {
+    if (this.dataSource.selectedMember?.code == member.code) {
       this.dataSource.selectMember(undefined);
-      this.selectedMember = undefined;
+      this.dataSource.selectedMember = undefined;
+      this.dataSource.selectedMemberId = undefined;
     } else {
       this.dataSource.selectMember(member);
-      this.selectedMember = member;
+      this.dataSource.selectedMember = member;
+      this.dataSource.selectedMemberId = id;
     }
   }
 
   toggleEvent(day: DayData) {
-    if(!!this.selectedMember){
 
-      this.ds.addVacation(day.date, this.selectedMember);
-      //TODO: Save Data in the DB (create vacation)
+    // only allow modificartion if a team member is selected
+    if(!!this.dataSource.selectedMember && !!this.dataSource.selectedMemberId){
 
-      // var memberIndex = this.dataSource.teamMembers.findIndex(x=> x.id == this.selectedMember?.id);
-      
-      // var vacationIndex = this.dataSource.teamMembers[memberIndex].vacations.findIndex(x=> x.getTime() == day.date.getTime())
-      // if(vacationIndex == -1)
-      // {
-      //   this.dataSource.teamMembers[memberIndex].vacations.push(day.date);
-      // }
-      // else
-      // {
-      //   this.dataSource.teamMembers[memberIndex].vacations.splice(vacationIndex, 1);
-      // }
-
-      // this.dataSource.selectMember(this.selectedMember);
+      this.ds.toggleVacation(this.dataSource.selectedMemberId, day.date, this.dataSource.selectedMember);
     }
   }
 }

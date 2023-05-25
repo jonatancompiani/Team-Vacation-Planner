@@ -3,18 +3,18 @@
    
   <mat-grid-tile rowspan="7" >
       <mat-chip-listbox >
-        <mat-chip-option *ngFor="let member of dataSource.teamMembers" 
-          [ngStyle]="{'background': member.color}"
-          (click)="selectTeamMember(member)">
-          <img matChipAvatar [src]="member.pictureUrl" />
-          {{member.name}}
-        </mat-chip-option>
+        <mat-chip *ngFor="let member of dataSource.teamMembers" 
+          [ngStyle]="{'background': member.payload.doc.data().color}"
+          (click)="selectTeamMember(member.payload.doc.data(), member.payload.doc.id)">
+          <img matChipAvatar [src]="member.payload.doc.data().pictureUrl" />
+          {{member.payload.doc.data().name}}
+        </mat-chip>
       </mat-chip-listbox>
   </mat-grid-tile>
 
   <mat-grid-tile rowspan="39">
     <section class="mat-elevation-z8" tabindex="0" 
-      [ngStyle]="{'border': '5px solid ' + selectedMemberColor}">
+      [ngStyle]="{'border': '5px solid ' + dataSource.selectedMemberColor}">
 
       <table mat-table [dataSource]="dataSource.data">
         <ng-container matColumnDef="month" sticky>
