@@ -31,7 +31,7 @@ export class MainTableComponent implements AfterViewInit {
     var now = new Date();
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    var result = day?.displayText ? "validday" : "";
+    var result = day?.displayText ? "validday" : "filler";
     result += day?.holiday ? " holiday" : "";
     result += day?.date.getTime() == today.getTime() ? " today" : "";
     result += day?.date.getTime() < today.getTime() ? " pastdate" : "";
@@ -44,7 +44,7 @@ export class MainTableComponent implements AfterViewInit {
 
     if (day?.vacationingMembers) {
       for (var d = 0; d < day.vacationingMembers?.length; d++) {
-        result += " - " + day.vacationingMembers[d].payload.doc.data().name + " on vacation"
+        result += " ■ " + day.vacationingMembers[d].payload.doc.data().name + " on vacation"
       }
     }
     return result;
