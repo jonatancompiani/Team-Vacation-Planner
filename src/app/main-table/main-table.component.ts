@@ -31,7 +31,7 @@ export class MainTableComponent implements AfterViewInit {
     var now = new Date();
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    var result = day?.displayText ? "validday" : "";
+    var result = day?.displayText ? "validday" : "filler";
     result += day?.holiday ? " holiday" : "";
     result += day?.date.getTime() == today.getTime() ? " today" : "";
     result += day?.date.getTime() < today.getTime() ? " pastdate" : "";
