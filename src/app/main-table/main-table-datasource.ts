@@ -90,7 +90,7 @@ export class MainTableDataSource
     this.holidayService.getAll().valueChanges().subscribe((data: Holiday[])=> {
       this.holidays = Array.prototype.map.call(data, (item: Holiday) => {
         var h = new Holiday();
-        h.description = item.description;
+        h.description = " ☼ " + item.description;
         h.country = item.country;
         h.date = (item.date as any).toDate();
         return h;

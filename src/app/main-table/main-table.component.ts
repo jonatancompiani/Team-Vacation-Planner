@@ -44,7 +44,7 @@ export class MainTableComponent implements AfterViewInit {
 
     if (day?.vacationingMembers) {
       for (var d = 0; d < day.vacationingMembers?.length; d++) {
-        result += " - " + day.vacationingMembers[d].payload.doc.data().name + " on vacation"
+        result += " ■ " + day.vacationingMembers[d].payload.doc.data().name + " on vacation"
       }
     }
     return result;
