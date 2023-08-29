@@ -4,7 +4,7 @@
   <mat-grid-tile rowspan="7" >
       <mat-chip-listbox >
         <mat-chip *ngFor="let member of dataSource.teamMembers" 
-          [ngStyle]="{'background': member.payload.doc.data().color}"
+          [ngStyle]="{'background': getMemberBackground(member.payload.doc.data()), border: '2px solid ' + member.payload.doc.data().color}"
           (click)="selectTeamMember(member.payload.doc.data(), member.payload.doc.id)">
           <img matChipAvatar [src]="member.payload.doc.data().pictureUrl" />
           {{member.payload.doc.data().name}}

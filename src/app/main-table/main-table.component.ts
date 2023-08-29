@@ -44,7 +44,7 @@ export class MainTableComponent implements AfterViewInit {
 
     if (day?.vacationingMembers) {
       for (var d = 0; d < day.vacationingMembers?.length; d++) {
-        result += " ■ " + day.vacationingMembers[d].payload.doc.data().name + " on vacation"
+        result += " ■ " + day.vacationingMembers[d].payload.doc.data().name + " on vacation" 
       }
     }
     return result;
@@ -68,6 +68,16 @@ export class MainTableComponent implements AfterViewInit {
     gradient += ")"
 
     return gradient;
+  }
+
+  getMemberBackground(member: any)
+  {
+    if(!this.dataSource.selectedMember || member.code == this.dataSource.selectedMember.code)
+    {
+      return member.color;
+    }
+    
+    return '#FAFAFA';
   }
 
   selectTeamMember(member: any, id: string) {
