@@ -1,7 +1,15 @@
 
 <mat-grid-list cols="1" rowHeight="1rem">
-   
-  <mat-grid-tile rowspan="7" >
+
+  <mat-grid-tile rowspan="3" >
+    <div class="example-button-row">
+      <button mat-icon-button (click)="previousYear()"><mat-icon>navigate_before</mat-icon></button>
+      <button mat-button disabled><h1>{{dataSource.selectedYear}}</h1></button>
+      <button mat-icon-button (click)="nextYear()"><mat-icon>navigate_next</mat-icon></button>
+    </div>
+  </mat-grid-tile>
+
+    <mat-grid-tile rowspan="7" >
       <mat-chip-listbox >
         <mat-chip *ngFor="let member of dataSource.teamMembers" 
           [ngStyle]="{'background': getMemberBackground(member), border: '2px solid ' + member.color}"
@@ -11,8 +19,6 @@
         </mat-chip>
       </mat-chip-listbox>
   </mat-grid-tile>
-
-  <h1>{{dataSource.selectedYear}}</h1> 
 
   <mat-grid-tile rowspan="39">
     <section class="mat-elevation-z8" tabindex="0" 

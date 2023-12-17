@@ -64,7 +64,7 @@ const MONTHS: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"
   providedIn: 'root'
 })
 export class MainTableDataSource {
-  selectedYear: number | undefined;
+  selectedYear: number = 0;
   monthsData: MainTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
@@ -80,6 +80,8 @@ export class MainTableDataSource {
       private holidayService: HolidayService,
       private teamMemberService: TeamMemberService
     ) {
+
+    this.selectedYear = new Date().getFullYear();
 
     this.holidayService.getAll().subscribe(data => {
       this.holidays = data;
@@ -102,11 +104,10 @@ export class MainTableDataSource {
 
   generateTable() {
 
-    this.monthsData?.splice(0);
+    this.monthsData = [];
 
     var propNames: string[] = this.getPropertyNames();
 
-    this.selectedYear ??= new Date().getFullYear();
     var firstDayOfYear = new Date(this.selectedYear, 0, 1);
     var lastDayOfYear = new Date(this.selectedYear, 11, 31);
 
@@ -144,15 +145,14 @@ export class MainTableDataSource {
       }
     }
   }
-  
-  fillTable(){
+
+  fillTable() {
     var propNames: string[] = this.getPropertyNames();
 
     propNames.forEach((prop) => {
       this.monthsData.forEach((mon: MainTableItem) => {
         var propValue = mon[prop as keyof MainTableItem];
-        if(typeof propValue == "object")
-        {
+        if (typeof propValue == "object") {
           var value = this.getHoliday(propValue.date);
           (mon[prop as keyof MainTableItem] as DayData).holiday = value;
           (mon[prop as keyof MainTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);

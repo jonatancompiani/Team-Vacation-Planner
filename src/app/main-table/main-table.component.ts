@@ -94,6 +94,18 @@ export class MainTableComponent implements AfterViewInit {
   gen(){ this.dataSource.generateTable(); }
   fill(){ this.dataSource.fillTable(); }
 
+  previousYear(){
+    this.dataSource.selectedYear--;
+    this.dataSource.generateTable();
+    this.dataSource.fillTable();
+  }
+
+  nextYear(){
+    this.dataSource.selectedYear++;
+    this.dataSource.generateTable();
+    this.dataSource.fillTable();
+  }
+
   toggleEvent(day: DayData) {
     // only allow modificartion if a team member is selected
     if(!!this.dataSource.selectedMember && !!this.dataSource.selectedMemberId){
