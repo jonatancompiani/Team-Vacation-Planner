@@ -83,15 +83,15 @@ export class MainTableDataSource {
 
     this.holidayService.getAll().subscribe(data => {
       this.holidays = data;
+      this.fillTable()
     });
 
     this.teamMemberService.getAll().subscribe(data => {
       this.teamMembers = data;
+      this.fillTable()
     });
 
     this.generateTable();
-
-    setTimeout(() => this.fillTable(), 800);
   }
 
   selectMember(member?: TeamMember) {
@@ -157,7 +157,6 @@ export class MainTableDataSource {
           (mon[prop as keyof MainTableItem] as DayData).holiday = value;
           (mon[prop as keyof MainTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);
         }
-
       });
     });
   }
