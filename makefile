@@ -1,5 +1,5 @@
 deploy:
-	ng deploy --base-href=https://jonatancompiani.github.io/Team-Vacation-Planner/
+	ng deploy --base-href=https://calendar.agoravai.work/
 
 run:
 	ng serve -o

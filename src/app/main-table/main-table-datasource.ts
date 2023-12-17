@@ -91,7 +91,7 @@ export class MainTableDataSource {
 
     this.generateTable();
 
-    setTimeout(() => this.fillTable(), 500);
+    setTimeout(() => this.fillTable(), 800);
   }
 
   selectMember(member?: TeamMember) {
@@ -148,17 +148,18 @@ export class MainTableDataSource {
   fillTable(){
     var propNames: string[] = this.getPropertyNames();
 
-    for (var prop = 0; prop < propNames.length; prop++) {
-      for (var m = 0; m < MONTHS.length; m++) {
-        var propValue = this.monthsData[m][propNames[prop] as keyof MainTableItem];
+    propNames.forEach((prop) => {
+      this.monthsData.forEach((mon: MainTableItem) => {
+        var propValue = mon[prop as keyof MainTableItem];
         if(typeof propValue == "object")
         {
           var value = this.getHoliday(propValue.date);
-          (this.monthsData[m][propNames[prop] as keyof MainTableItem] as DayData).holiday = value;
-          (this.monthsData[m][propNames[prop] as keyof MainTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);
+          (mon[prop as keyof MainTableItem] as DayData).holiday = value;
+          (mon[prop as keyof MainTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);
         }
-      }
-    }
+
+      });
+    });
   }
 
   getVacationingTeamMembers(date: Date, memberFilter?: TeamMember): TeamMember[] | undefined {
