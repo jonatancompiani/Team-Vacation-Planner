@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyCeBCuFMxvxExw_kEoip_zZPerQ5rZIbrs",
-    authDomain: "team-vacation-planner-poc.firebaseapp.com",
-    projectId: "team-vacation-planner-poc",
-    storageBucket: "team-vacation-planner-poc.appspot.com",
-    messagingSenderId: "798745482636",
-    appId: "1:798745482636:web:cc8779acb5acdffe2832a9",
-    measurementId: "G-6WQCV4D8G3"
-  };
+  apiKey: "AIzaSyB5f7bjaiag4KAx4YTg65CPb7Et7FaG9HE",
+  authDomain: "team-vacation-planner-dev.firebaseapp.com",
+  projectId: "team-vacation-planner-dev",
+  storageBucket: "team-vacation-planner-dev.appspot.com",
+  messagingSenderId: "1033231197183",
+  appId: "1:1033231197183:web:9c3064abfc2409f33abdca",
+  measurementId: "G-JJ607GP8S0"
+};

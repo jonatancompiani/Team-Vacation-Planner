@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Holiday } from '../models/Holiday';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,12 +11,12 @@ export class HolidayService {
 
   collection: AngularFirestoreCollection<Holiday>;
 
-  constructor(private db: AngularFirestore) {
-    this.collection = db.collection(this.dbPath);
+  constructor(private firestore: AngularFirestore) {
+    this.collection = firestore.collection(this.dbPath);
   }
 
-  getAll(): AngularFirestoreCollection<Holiday> {
-    return this.collection;
+  getAll() {
+   return this.collection.valueChanges();
   }
 
   create(data: Holiday): any {

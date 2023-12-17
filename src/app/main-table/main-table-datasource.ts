@@ -6,6 +6,7 @@ import { TeamMemberService } from '../services/teamMember.service';
 import { HolidayService } from '../services/holiday.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TeamMember } from '../models/TeamMember';
 
 
 export interface MainTableItem {
@@ -54,67 +55,60 @@ export interface DayData {
   displayText: string;
   date: Date;
   holiday: string | undefined,
-  vacationingMembers: any[] | undefined
+  vacationingMembers: TeamMember[] | undefined
 }
 
 const MONTHS: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-/**
- * Data source for the MainTable view. This class should
- * encapsulate all logic for fetching and manipulating the displayed data
- * (including sorting, pagination, and filtering).
- */
 @Injectable({
   providedIn: 'root'
 })
-export class MainTableDataSource
-{
-  data: MainTableItem[] = [];
+export class MainTableDataSource {
+  selectedYear: number | undefined;
+  monthsData: MainTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
- 
+
   holidays: Holiday[] = [];
-  teamMembers: any[] | undefined;
+  teamMembers: TeamMember[] = [];
   selectedMemberColor: string = "transparent";
-  selectedMember: any | undefined;
+  selectedMember: TeamMember | undefined;
   selectedMemberId: string | undefined;
 
   constructor
-  (
-    private holidayService: HolidayService,
-    private teamMemberService: TeamMemberService
-  )
-  {
+    (
+      private holidayService: HolidayService,
+      private teamMemberService: TeamMemberService
+    ) {
 
+    this.holidayService.getAll().subscribe(data => {
+      this.holidays = data;
+    });
 
-    this.holidayService.getAll().valueChanges().subscribe((data: Holiday[])=> {
-      this.holidays = Array.prototype.map.call(data, (item: Holiday) => {
-        var h = new Holiday();
-        h.description = " ☼ " + item.description;
-        h.country = item.country;
-        h.date = (item.date as any).toDate();
-        return h;
-      }) as Holiday[];
-    })
+    this.teamMemberService.getAll().subscribe(data => {
+      this.teamMembers = data;
+    });
 
+    this.generateTable();
 
-    this.teamMemberService.get().subscribe(data=> {this.teamMembers = data; this.data = this.getDates(this.selectedMember);});
-
+    setTimeout(() => this.fillTable(), 500);
   }
 
-  selectMember(member?: any){
-    this.data?.splice(0);
-    this.data = this.getDates(member);
+  selectMember(member?: TeamMember) {
+    this.selectedMember = member;
+    this.selectedMemberId = member?.code;
+    this.fillTable();
   }
 
+  generateTable() {
 
-  getDates(member?: any) : MainTableItem[] {
-    var data: MainTableItem[] = [];
+    this.monthsData?.splice(0);
+
     var propNames: string[] = this.getPropertyNames();
 
-    var currentYear = new Date().getFullYear();
-    var firstDayOfYear = new Date(currentYear, 0, 1);
-    var lastDayOfYear = new Date(currentYear, 11, 31);
+    this.selectedYear ??= new Date().getFullYear();
+    var firstDayOfYear = new Date(this.selectedYear, 0, 1);
+    var lastDayOfYear = new Date(this.selectedYear, 11, 31);
 
     var monthToAdd: MainTableItem | undefined;
     var propIndex: number = 0.
@@ -133,28 +127,48 @@ export class MainTableDataSource
 
       if (!monthToAdd) continue; // will never hit, here just for the interpreter
 
-      var dayData: DayData = {date: new Date(d), displayText: d.getDate().toString(), holiday: this.getHoliday(d), vacationingMembers: this.getVacationingTeamMembers(d, member) }
+      var dayData: DayData =
+      {
+        date: new Date(d),
+        displayText: d.getDate().toString(),
+        holiday: undefined,
+        vacationingMembers: undefined
+      }
 
       // sets the day (cell) value
       monthToAdd[propName as keyof MainTableItem] = dayData as never;
 
       // on last day of month (row), adds it to the main table
       if (this.isLastDayOfMonth(d)) {
-        data.push(monthToAdd);
+        this.monthsData.push(monthToAdd);
       }
     }
+  }
+  
+  fillTable(){
+    var propNames: string[] = this.getPropertyNames();
 
-    return data;
+    for (var prop = 0; prop < propNames.length; prop++) {
+      for (var m = 0; m < MONTHS.length; m++) {
+        var propValue = this.monthsData[m][propNames[prop] as keyof MainTableItem];
+        if(typeof propValue == "object")
+        {
+          var value = this.getHoliday(propValue.date);
+          (this.monthsData[m][propNames[prop] as keyof MainTableItem] as DayData).holiday = value;
+          (this.monthsData[m][propNames[prop] as keyof MainTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);
+        }
+      }
+    }
   }
 
-  getVacationingTeamMembers(date: Date, memberFilter?: any): any[] | undefined {    
-    return this.teamMembers?.filter((member)=> (!memberFilter || member.payload.doc.data().code == memberFilter?.code) 
-            && member.payload.doc.data().vacations?.filter((vacation: any)=> this.areDatesEqual(vacation.toDate(), date)).length > 0);
+  getVacationingTeamMembers(date: Date, memberFilter?: TeamMember): TeamMember[] | undefined {
+    return this.teamMembers?.filter((member) => (!memberFilter || member.code == memberFilter?.code)
+      && member.vacations?.filter((vacation: any) => this.areDatesEqual(vacation.toDate(), date)).length > 0);
   }
 
-  toggleVacation(dbId: string, date: Date, member: any){
-    var existingVacations = member.vacations.filter((d: any)=> this.areDatesEqual(d, date))
-    if(existingVacations.length == 0)
+  toggleVacation(dbId: string, date: Date, member: TeamMember) {
+    var existingVacations = member.vacations.filter((d: any) => this.areDatesEqual(d, date))
+    if (existingVacations.length == 0)
       member.vacations.push(date);
     else
       member.vacations.splice(member.vacations.indexOf(existingVacations[0]), 1);
@@ -162,9 +176,9 @@ export class MainTableDataSource
     this.teamMemberService.update(dbId, member);
   }
 
-  private getHoliday(date: Date): string | undefined{
-    var filteredHolidays = this.holidays.filter((h)=> this.areDatesEqual(h.date, date));
-    return  filteredHolidays.length > 0 ? filteredHolidays[0].description : undefined
+  private getHoliday(date: Date): string | undefined {
+    var filteredHolidays = this.holidays.filter((h) => this.areDatesEqual(h.date, date));
+    return filteredHolidays.length > 0 ? " ☼ " + filteredHolidays[0].description : undefined
   }
 
   private isLastDayOfMonth(date: Date): boolean {
@@ -186,14 +200,14 @@ export class MainTableDataSource
 
   private areDatesEqual(date1: any, date2: Date): boolean {
     // for some reason, sometimes the date1 is not a Date object, but a Timestamp object
-    try{
-    return date1?.getFullYear() == date2?.getFullYear() 
-        && date1?.getMonth() == date2?.getMonth() 
-        && date1?.getDate() == date2?.getDate();   
-    }catch{
-      return date1?.toDate()?.getFullYear() == date2?.getFullYear() 
-        && date1?.toDate()?.getMonth() == date2?.getMonth() 
-        && date1?.toDate()?.getDate() == date2?.getDate();   
+    try {
+      return date1?.getFullYear() == date2?.getFullYear()
+        && date1?.getMonth() == date2?.getMonth()
+        && date1?.getDate() == date2?.getDate();
+    } catch {
+      return date1?.toDate()?.getFullYear() == date2?.getFullYear()
+        && date1?.toDate()?.getMonth() == date2?.getMonth()
+        && date1?.toDate()?.getDate() == date2?.getDate();
     }
   }
 }

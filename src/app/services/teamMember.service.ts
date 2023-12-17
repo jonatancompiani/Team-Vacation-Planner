@@ -1,39 +1,35 @@
+
+import { TeamMember } from '../models/TeamMember';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamMemberService {
 
-  constructor(private firestore: AngularFirestore) { }
+  private dbPath = '/TeamMembers';
 
-    private collectionName = 'TeamMembers';
+  collection: AngularFirestoreCollection<TeamMember>;
 
-  create(data: any) {
-    return new Promise<any>((resolve, reject) => {
-      this.firestore
-        .collection(this.collectionName)
-        .add(data)
-        .then(res => {}, err => reject(err));
-    });
+
+  constructor(private firestore: AngularFirestore) {
+    this.collection = firestore.collection(this.dbPath);
   }
 
-  update(id: string, data: any) {
-    return this.firestore
-      .collection(this.collectionName)
-      .doc(id)
-      .set(data);
-  }
-
-  get() {
-    return this.firestore.collection(this.collectionName).snapshotChanges();
-  }
-
-  delete(data: any) {
-    return this.firestore
-      .collection(this.collectionName)
-      .doc(data.payload.doc.id)
-      .delete();
-  }
+  getAll() {
+    return this.collection.valueChanges();
+   }
+ 
+   create(data: TeamMember): any {
+     return this.collection.add({ ...data });
+   }
+ 
+   update(id: string, data: any): Promise<void> {
+     return this.collection.doc(id).update(data);
+   }
+ 
+   delete(id: string): Promise<void> {
+     return this.collection.doc(id).delete();
+   }
 }

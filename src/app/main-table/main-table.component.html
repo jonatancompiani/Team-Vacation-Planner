@@ -4,19 +4,21 @@
   <mat-grid-tile rowspan="7" >
       <mat-chip-listbox >
         <mat-chip *ngFor="let member of dataSource.teamMembers" 
-          [ngStyle]="{'background': getMemberBackground(member.payload.doc.data()), border: '2px solid ' + member.payload.doc.data().color}"
-          (click)="selectTeamMember(member.payload.doc.data(), member.payload.doc.id)">
-          <img matChipAvatar [src]="member.payload.doc.data().pictureUrl" />
-          {{member.payload.doc.data().name}}
+          [ngStyle]="{'background': getMemberBackground(member), border: '2px solid ' + member.color}"
+          (click)="selectTeamMember(member, member.code)">
+          <img matChipAvatar [src]="member.pictureUrl" />
+          {{member.name}}
         </mat-chip>
       </mat-chip-listbox>
   </mat-grid-tile>
+
+  <h1>{{dataSource.selectedYear}}</h1> 
 
   <mat-grid-tile rowspan="39">
     <section class="mat-elevation-z8" tabindex="0" 
       [ngStyle]="{'border': '5px solid ' + dataSource.selectedMemberColor}">
 
-      <table mat-table [dataSource]="dataSource.data">
+      <table mat-table [dataSource]="dataSource.monthsData">
 
         <ng-container *ngFor="let day of displayedColumns" [matColumnDef]="day">
             <div *ngIf="day != 'month' ">
@@ -41,3 +43,5 @@
     </section>
   </mat-grid-tile>
 </mat-grid-list>
+<!-- <button (click)="gen()">generate table</button>
+<button (click)="fill()">fill table</button> -->

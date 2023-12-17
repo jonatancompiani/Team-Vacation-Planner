@@ -44,7 +44,7 @@ export class MainTableComponent implements AfterViewInit {
 
     if (day?.vacationingMembers) {
       for (var d = 0; d < day.vacationingMembers?.length; d++) {
-        result += " ■ " + day.vacationingMembers[d].payload.doc.data().name + " on vacation" 
+        result += " ■ " + day.vacationingMembers[d].name + " on vacation" 
       }
     }
     return result;
@@ -55,14 +55,14 @@ export class MainTableComponent implements AfterViewInit {
       return ""
 
     if (members.length == 1) {
-      return members[0].payload.doc.data().color
+      return members[0].color
     }
 
     var startGrad = 0;
     var step = 100 / members.length;
     var gradient = "linear-gradient(45deg"
     for (var i = 0; i < members.length; i++) {
-      gradient += ", " + members[i].payload.doc.data().color + " " + startGrad + "% " + (startGrad + step) + "% ";
+      gradient += ", " + members[i].color + " " + startGrad + "% " + (startGrad + step) + "% ";
       startGrad += step;
     }
     gradient += ")"
@@ -86,14 +86,13 @@ export class MainTableComponent implements AfterViewInit {
 
     if (this.dataSource.selectedMember?.code == member.code) {
       this.dataSource.selectMember(undefined);
-      this.dataSource.selectedMember = undefined;
-      this.dataSource.selectedMemberId = undefined;
     } else {
       this.dataSource.selectMember(member);
-      this.dataSource.selectedMember = member;
-      this.dataSource.selectedMemberId = id;
     }
   }
+
+  gen(){ this.dataSource.generateTable(); }
+  fill(){ this.dataSource.fillTable(); }
 
   toggleEvent(day: DayData) {
     // only allow modificartion if a team member is selected
