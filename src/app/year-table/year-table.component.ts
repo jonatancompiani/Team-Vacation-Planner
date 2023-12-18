@@ -1,15 +1,15 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { DayData, MainTableDataSource, MainTableItem } from './main-table-datasource';
+import { DayData, YearTableDataSource, YearTableItem } from './year-table-datasource';
 
 @Component({
-  selector: 'app-main-table',
-  templateUrl: './main-table.component.html',
-  styleUrls: ['./main-table.component.sass']
+  selector: 'app-year-table',
+  templateUrl: './year-table.component.html',
+  styleUrls: ['./year-table.component.sass']
 })
-export class MainTableComponent implements AfterViewInit {
-  @ViewChild(MatTable) table!: MatTable<MainTableItem>;
-  dataSource: MainTableDataSource;
+export class YearTableComponent implements AfterViewInit {
+  @ViewChild(MatTable) table!: MatTable<YearTableItem>;
+  dataSource: YearTableDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns: string[] = [
     'month', 'sun1', 'mon1', 'tue1', 'wed1', 'thu1', 'fri1', 'sat1', 
@@ -20,7 +20,7 @@ export class MainTableComponent implements AfterViewInit {
     'sun6', 'mon6'
   ];
 
-  constructor(private ds: MainTableDataSource) {
+  constructor(private ds: YearTableDataSource) {
     this.dataSource = ds;
   }
 

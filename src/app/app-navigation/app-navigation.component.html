@@ -2,7 +2,12 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport>
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/" (click)="drawer.toggle()">Table</a>
+
+      <mat-list-item routerLink="/" (click)="drawer.toggle()">
+        <mat-icon matListItemIcon>calendar_today</mat-icon>
+        <div matListItemTitle>Year Calendar</div>
+      </mat-list-item>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -19,8 +24,8 @@
         Team Vacation Planner
       </span>
     </mat-toolbar>
-    <!-- Add Content Here -->
 
     <router-outlet></router-outlet>
+    
   </mat-sidenav-content>
 </mat-sidenav-container>

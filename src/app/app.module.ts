@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainTableComponent } from './main-table/main-table.component';
+import { YearTableComponent } from './year-table/year-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -25,7 +25,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 @NgModule({
   declarations: [
     AppComponent,
-    MainTableComponent,
+    YearTableComponent,
     AppNavigationComponent
   ],
   imports: [

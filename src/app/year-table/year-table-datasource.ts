@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { TeamMember } from '../models/TeamMember';
 
 
-export interface MainTableItem {
+export interface YearTableItem {
   id: number;
   month: string;
   sun1: DayData | undefined;
@@ -63,9 +63,9 @@ const MONTHS: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"
 @Injectable({
   providedIn: 'root'
 })
-export class MainTableDataSource {
+export class YearTableDataSource {
   selectedYear: number = 0;
-  monthsData: MainTableItem[] = [];
+  monthsData: YearTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
@@ -111,7 +111,7 @@ export class MainTableDataSource {
     var firstDayOfYear = new Date(this.selectedYear, 0, 1);
     var lastDayOfYear = new Date(this.selectedYear, 11, 31);
 
-    var monthToAdd: MainTableItem | undefined;
+    var monthToAdd: YearTableItem | undefined;
     var propIndex: number = 0.
     for (var d = firstDayOfYear; d <= lastDayOfYear; d.setDate(d.getDate() + 1)) {
       if (d.getDate() == 1) {
@@ -137,9 +137,9 @@ export class MainTableDataSource {
       }
 
       // sets the day (cell) value
-      monthToAdd[propName as keyof MainTableItem] = dayData as never;
+      monthToAdd[propName as keyof YearTableItem] = dayData as never;
 
-      // on last day of month (row), adds it to the main table
+      // on last day of month (row), adds it to the year table
       if (this.isLastDayOfMonth(d)) {
         this.monthsData.push(monthToAdd);
       }
@@ -150,12 +150,12 @@ export class MainTableDataSource {
     var propNames: string[] = this.getPropertyNames();
 
     propNames.forEach((prop) => {
-      this.monthsData.forEach((mon: MainTableItem) => {
-        var propValue = mon[prop as keyof MainTableItem];
+      this.monthsData.forEach((mon: YearTableItem) => {
+        var propValue = mon[prop as keyof YearTableItem];
         if (typeof propValue == "object") {
           var value = this.getHoliday(propValue.date);
-          (mon[prop as keyof MainTableItem] as DayData).holiday = value;
-          (mon[prop as keyof MainTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);
+          (mon[prop as keyof YearTableItem] as DayData).holiday = value;
+          (mon[prop as keyof YearTableItem] as DayData).vacationingMembers = this.getVacationingTeamMembers(propValue.date, this.selectedMember);
         }
       });
     });
@@ -187,15 +187,15 @@ export class MainTableDataSource {
   }
 
   private getPropertyNames(): string[] {
-    const instance: MainTableItem = { id: 0, month: "", sun1: undefined, mon1: undefined, tue1: undefined, wed1: undefined, thu1: undefined, fri1: undefined, sat1: undefined, sun2: undefined, mon2: undefined, tue2: undefined, wed2: undefined, thu2: undefined, fri2: undefined, sat2: undefined, sun3: undefined, mon3: undefined, tue3: undefined, wed3: undefined, thu3: undefined, fri3: undefined, sat3: undefined, sun4: undefined, mon4: undefined, tue4: undefined, wed4: undefined, thu4: undefined, fri4: undefined, sat4: undefined, sun5: undefined, mon5: undefined, tue5: undefined, wed5: undefined, thu5: undefined, fri5: undefined, sat5: undefined, sun6: undefined, mon6: undefined };
+    const instance: YearTableItem = { id: 0, month: "", sun1: undefined, mon1: undefined, tue1: undefined, wed1: undefined, thu1: undefined, fri1: undefined, sat1: undefined, sun2: undefined, mon2: undefined, tue2: undefined, wed2: undefined, thu2: undefined, fri2: undefined, sat2: undefined, sun3: undefined, mon3: undefined, tue3: undefined, wed3: undefined, thu3: undefined, fri3: undefined, sat3: undefined, sun4: undefined, mon4: undefined, tue4: undefined, wed4: undefined, thu4: undefined, fri4: undefined, sat4: undefined, sun5: undefined, mon5: undefined, tue5: undefined, wed5: undefined, thu5: undefined, fri5: undefined, sat5: undefined, sun6: undefined, mon6: undefined };
     return Object.getOwnPropertyNames(instance);
   }
 
-  private getPropFromDayOfWeek(date: Date): keyof MainTableItem {
+  private getPropFromDayOfWeek(date: Date): keyof YearTableItem {
 
     var propNames = ["sun1", "mon1", "tue1", "wed1", "thu1", "fri1", "sat1"];
 
-    return propNames[date.getDay()] as keyof MainTableItem;
+    return propNames[date.getDay()] as keyof YearTableItem;
   }
 
   private areDatesEqual(date1: any, date2: Date): boolean {

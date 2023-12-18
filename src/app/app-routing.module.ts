@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainTableComponent } from './main-table/main-table.component';
+import { YearTableComponent } from './year-table/year-table.component';
 
 const routes: Routes = [
   {
@@ -8,7 +8,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MainTableComponent
+        component: YearTableComponent
       }
     ]
   }
