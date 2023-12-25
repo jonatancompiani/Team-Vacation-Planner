@@ -1,17 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { YearTableComponent } from './year-table/year-table.component';
+import { TeamMembersComponent } from './team-members/team-members.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
-      {
-        path: '',
-        component: YearTableComponent
-      }
-    ]
-  }
+      { path: '',       component: YearTableComponent },
+      { path: 'teams',  component: TeamMembersComponent }
 ];
 
 @NgModule({

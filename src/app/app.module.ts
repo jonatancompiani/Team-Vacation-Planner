@@ -19,14 +19,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips'
 import { firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';        
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { TeamMembersComponent } from './team-members/team-members.component';        
 
 
 @NgModule({
   declarations: [
     AppComponent,
     YearTableComponent,
-    AppNavigationComponent
+    AppNavigationComponent,
+    TeamMembersComponent
   ],
   imports: [
     BrowserModule,
