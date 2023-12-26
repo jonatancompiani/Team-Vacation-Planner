@@ -20,15 +20,18 @@ import { MatChipsModule } from '@angular/material/chips'
 import { firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { TeamMembersComponent } from './team-members/team-members.component';        
-
+import { TeamMembersComponent } from './team-members/team-members.component';
+import { TeamMemberDialogComponent } from './team-member-dialog/team-member-dialog.component';       
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     YearTableComponent,
     AppNavigationComponent,
-    TeamMembersComponent
+    TeamMembersComponent,
+    TeamMemberDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,8 @@ import { TeamMembersComponent } from './team-members/team-members.component';
     MatChipsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
