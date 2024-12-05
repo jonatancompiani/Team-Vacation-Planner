@@ -24,7 +24,7 @@ export class TeamMembersComponent {
     });
   }
 
-  displayedColumns: string[] = ['color', 'name', 'pictureUrl', 'action'];
+  displayedColumns: string[] = ['name', 'picture','pictureUrl','color',  'action'];
   
   ngOnInit(): void {
     this.loadTeams();
@@ -59,7 +59,7 @@ export class TeamMembersComponent {
 
   edit(teamMember: TeamMember) {
     const dialogRef = this.dialog.open(TeamMemberDialogComponent, {
-      width: '400px',
+      width: '800px',
       data: { teamMember, isEdit: true }
     });
 

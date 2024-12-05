@@ -1,26 +1,46 @@
 <h2 mat-dialog-title>Add New Member</h2>
 
 <mat-dialog-content>
-  <form [formGroup]="teamMemberForm">
+  <form [formGroup]="teamMemberForm" class="form-container">
+
+    <!-- Name Field -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Name</mat-label>
-      <input matInput formControlName="name" required>
-      <mat-error *ngIf="teamMemberForm.get('name')?.hasError('required')">Name is required</mat-error>
+      <input matInput formControlName="name" required />
+      <mat-error *ngIf="teamMemberForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
     </mat-form-field>
-
+  
+    <!-- Color Field -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Color</mat-label>
-      <textarea matInput formControlName="color" required></textarea>
-      <mat-error *ngIf="teamMemberForm.get('color')?.hasError('required')">Color is required</mat-error>
+      <input matInput formControlName="color" required />
+      <mat-error *ngIf="teamMemberForm.get('color')?.hasError('required')">
+        Color is required
+      </mat-error>
     </mat-form-field>
-
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Picture</mat-label>
-      <textarea matInput formControlName="pictureUrl" required></textarea>
-      <mat-error *ngIf="teamMemberForm.get('pictureUrl')?.hasError('required')">Picture is required</mat-error>
-    </mat-form-field>
-
+  
+    <!-- Picture URL and Image Display -->
+    <div class="picture-container">
+      <div class="image-preview" *ngIf="teamMemberForm.get('pictureUrl')?.value">
+        <img
+          matChipAvatar
+          [src]="teamMemberForm.get('pictureUrl')?.value"
+          alt="Team Member Picture"
+        />
+      </div>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Picture URL</mat-label>
+        <input matInput formControlName="pictureUrl" required />
+        <mat-error *ngIf="teamMemberForm.get('pictureUrl')?.hasError('required')">
+          Picture URL is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
   </form>
+  
 </mat-dialog-content>
 
 <mat-dialog-actions>
