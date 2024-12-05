@@ -73,7 +73,7 @@ export class YearTableComponent implements AfterViewInit {
 
   getMemberBackground(member: any)
   {
-    if(!this.dataSource.selectedMember || member.code == this.dataSource.selectedMember.code)
+    if(!this.dataSource.selectedMember || member.id == this.dataSource.selectedMember.id)
     {
       return member.color;
     }
@@ -81,11 +81,11 @@ export class YearTableComponent implements AfterViewInit {
     return '#FAFAFA';
   }
 
-  selectTeamMember(member: any, id: string) {
+  selectTeamMember(member: any) {
 
     this.dataSource.selectedMemberColor = this.dataSource.selectedMemberColor == member.color ? "transparent" : member.color
 
-    if (this.dataSource.selectedMember?.code == member.code) {
+    if (this.dataSource.selectedMember?.id == member.id) {
       this.dataSource.selectMember(undefined);
     } else {
       this.dataSource.selectMember(member);
@@ -111,7 +111,7 @@ export class YearTableComponent implements AfterViewInit {
     // only allow modificartion if a team member is selected
     if(!!this.dataSource.selectedMember && !!this.dataSource.selectedMemberId){
 
-      this.ds.toggleVacation(this.dataSource.selectedMemberId, day.date, this.dataSource.selectedMember);
+      this.ds.toggleVacation(this.dataSource.selectedMemberId!, day.date, this.dataSource.selectedMember);
     }
   }
 }

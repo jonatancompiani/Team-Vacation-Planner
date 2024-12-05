@@ -19,7 +19,6 @@ export class TeamMemberDialogComponent {
   ) {
     this.teamMemberForm = this.fb.group({
       name: ['', [Validators.required]],
-      code: [''],
       color: [''],
       pictureUrl: ['']
     });

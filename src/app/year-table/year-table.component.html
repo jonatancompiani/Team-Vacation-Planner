@@ -13,7 +13,7 @@
       <mat-chip-listbox >
         <mat-chip *ngFor="let member of dataSource.teamMembers" 
           [ngStyle]="{'background': getMemberBackground(member), border: '2px solid ' + member.color}"
-          (click)="selectTeamMember(member, member.code)">
+          (click)="selectTeamMember(member)">
           <img matChipAvatar [src]="member.pictureUrl" />
           {{member.name}}
         </mat-chip>

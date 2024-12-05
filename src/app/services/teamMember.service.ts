@@ -18,7 +18,7 @@ export class TeamMemberService {
   }
 
   getAll() {
-    return this.collection.valueChanges();
+    return this.firestore.collection<TeamMember>(this.dbPath).valueChanges({ idField: 'id' });
    }
   
    create(team: TeamMember) {
@@ -26,7 +26,7 @@ export class TeamMemberService {
   }
 
    update(id: string, data: any): Promise<void> {
-     return this.collection.doc(id).update(data);
+     return this.firestore.collection(this.dbPath).doc(id).update(data);
    }
  
    delete(id: string): Promise<void> {

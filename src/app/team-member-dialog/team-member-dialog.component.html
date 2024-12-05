@@ -2,25 +2,19 @@
 
 <mat-dialog-content>
   <form [formGroup]="teamMemberForm">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" required>
       <mat-error *ngIf="teamMemberForm.get('name')?.hasError('required')">Name is required</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Code</mat-label>
-      <textarea matInput formControlName="code" required></textarea>
-      <mat-error *ngIf="teamMemberForm.get('code')?.hasError('required')">Code is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Color</mat-label>
       <textarea matInput formControlName="color" required></textarea>
       <mat-error *ngIf="teamMemberForm.get('color')?.hasError('required')">Color is required</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Picture</mat-label>
       <textarea matInput formControlName="pictureUrl" required></textarea>
       <mat-error *ngIf="teamMemberForm.get('pictureUrl')?.hasError('required')">Picture is required</mat-error>

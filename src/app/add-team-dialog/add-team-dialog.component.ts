@@ -17,7 +17,7 @@ export class AddTeamDialogComponent {
   ) {
     this.teamForm = this.fb.group({
       name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: [''],
     });
   }
 

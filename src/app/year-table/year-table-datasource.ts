@@ -98,7 +98,7 @@ export class YearTableDataSource {
 
   selectMember(member?: TeamMember) {
     this.selectedMember = member;
-    this.selectedMemberId = member?.code;
+    this.selectedMemberId = member?.id;
     this.fillTable();
   }
 
@@ -162,11 +162,12 @@ export class YearTableDataSource {
   }
 
   getVacationingTeamMembers(date: Date, memberFilter?: TeamMember): TeamMember[] | undefined {
-    return this.teamMembers?.filter((member) => (!memberFilter || member.code == memberFilter?.code)
+    return this.teamMembers?.filter((member) => (!memberFilter || member.id == memberFilter?.id)
       && member.vacations?.filter((vacation: any) => this.areDatesEqual(vacation.toDate(), date)).length > 0);
   }
 
   toggleVacation(dbId: string, date: Date, member: TeamMember) {
+    member.vacations = member.vacations ?? [];
     var existingVacations = member.vacations.filter((d: any) => this.areDatesEqual(d, date))
     if (existingVacations.length == 0)
       member.vacations.push(date);

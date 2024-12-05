@@ -24,7 +24,7 @@ export class TeamMembersComponent {
     });
   }
 
-  displayedColumns: string[] = ['code', 'color', 'name', 'pictureUrl', 'action'];
+  displayedColumns: string[] = ['color', 'name', 'pictureUrl', 'action'];
   
   ngOnInit(): void {
     this.loadTeams();

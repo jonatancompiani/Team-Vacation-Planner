@@ -2,21 +2,23 @@
 
 <mat-dialog-content>
   <form [formGroup]="teamForm">
-    <mat-form-field appearance="fill">
+    
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Team Name</mat-label>
       <input matInput formControlName="name" required>
       <mat-error *ngIf="teamForm.get('name')?.hasError('required')">Team name is required</mat-error>
     </mat-form-field>
-
-    <mat-form-field appearance="fill">
+    
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Team Description</mat-label>
-      <textarea matInput formControlName="description" required></textarea>
+      <textarea matInput formControlName="description"></textarea>
       <mat-error *ngIf="teamForm.get('description')?.hasError('required')">Description is required</mat-error>
     </mat-form-field>
+    
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button mat-button (click)="onClose()">Cancel</button>
-  <button mat-button color="primary" (click)="onSave()" [disabled]="teamForm.invalid">Save</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="teamForm.invalid">Save</button>
 </mat-dialog-actions>

@@ -28,6 +28,8 @@ import { TeamComponent } from './team/team.component';
 import { AddTeamDialogComponent } from './add-team-dialog/add-team-dialog.component';
 import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TeamMembersComponent,
     TeamMemberDialogComponent,
     TeamComponent,
-    AddTeamDialogComponent
+    AddTeamDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,15 +61,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireDatabaseModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatIconModule,
     MatError,
-    BrowserModule,
-    MatDialogModule,
-    MatButtonModule,
     MatFormFieldModule,
-    MatIconModule,
-    MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
