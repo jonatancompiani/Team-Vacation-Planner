@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Team, TeamService } from 'src/app/services/team.service';
 
 
 @Component({
@@ -12,10 +13,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class TeamMemberDialogComponent {
 
   teamMemberForm: FormGroup;
-
+  teams: Team[] = [];
+  
   constructor(
     private dialogRef: MatDialogRef<TeamMemberDialogComponent>,
     private fb: FormBuilder,
+    private teamService: TeamService,
     @Inject(MAT_DIALOG_DATA) public data: { teamMember: any; isEdit: boolean }
   ) {
     this.teamMemberForm = this.fb.group({
@@ -24,7 +27,6 @@ export class TeamMemberDialogComponent {
       pictureUrl: ['']
     });
 
-    // If in edit mode, set the form values
     if (data && data.isEdit && data.teamMember) {
       this.teamMemberForm.patchValue({
         name: data.teamMember.name,
@@ -32,7 +34,12 @@ export class TeamMemberDialogComponent {
         pictureUrl: data.teamMember.pictureUrl
       });
     }
+  }
 
+  ngOnInit(): void {
+    this.teamService.getTeams().subscribe((data) => {
+      this.teams = data;
+    });
   }
 
   onClose(): void {

@@ -15,7 +15,7 @@
     <!-- Color Field -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Color</mat-label>
-      <input matInput formControlName="color" required />
+      <input type="color" matInput formControlName="color" required />
       <mat-error *ngIf="teamMemberForm.get('color')?.hasError('required')">
         Color is required
       </mat-error>
@@ -38,6 +38,13 @@
         </mat-error>
       </mat-form-field>
     </div>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Select Team</mat-label>
+      <mat-select formControlName="team" required>
+        <mat-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   
   </form>
   
