@@ -3,16 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { YearTableComponent } from './year-table/year-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { AppNavigationComponent } from './app-navigation/app-navigation.component';
+import { AppNavigationComponent } from './components/app-navigation/app-navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -20,16 +19,17 @@ import { MatChipsModule } from '@angular/material/chips'
 import { firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { TeamMembersComponent } from './team-members/team-members.component';
-import { TeamMemberDialogComponent } from './team-member-dialog/team-member-dialog.component';       
+import { TeamMemberDialogComponent } from './components/TeamMember/team-member-dialog/team-member-dialog.component';       
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { TeamComponent } from './team/team.component';
-import { AddTeamDialogComponent } from './add-team-dialog/add-team-dialog.component';
+import { AddTeamDialogComponent } from './components/Team/add-team-dialog/add-team-dialog.component';
 import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { TeamComponent } from './components/Team/team/team.component';
+import { TeamMembersComponent } from './components/TeamMember/team-members/team-members.component';
+import { YearTableComponent } from './components/Calendar/year-table/year-table.component';
 
 @NgModule({
   declarations: [

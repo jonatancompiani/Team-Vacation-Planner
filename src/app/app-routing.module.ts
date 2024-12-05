@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { YearTableComponent } from './year-table/year-table.component';
-import { TeamMembersComponent } from './team-members/team-members.component';
-import { TeamComponent } from './team/team.component';
+import { TeamComponent } from './components/Team/team/team.component';
+import { TeamMembersComponent } from './components/TeamMember/team-members/team-members.component';
+import { YearTableComponent } from './components/Calendar/year-table/year-table.component';
 
 const routes: Routes = [
       { path: '',       component: YearTableComponent },

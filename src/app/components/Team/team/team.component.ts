@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamService, Team } from '../services/team.service';
+
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Team, TeamService } from 'src/app/services/team.service';
 import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.component';
 
 @Component({

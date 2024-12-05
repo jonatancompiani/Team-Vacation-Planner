@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { TeamMemberDialogComponent } from '../team-member-dialog/team-member-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { TeamMember } from '../models/TeamMember';
-import { TeamMemberService } from '../services/teamMember.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TeamMember } from 'src/app/models/TeamMember';
+import { TeamMemberService } from 'src/app/services/teamMember.service';
+import { TeamMemberDialogComponent } from '../team-member-dialog/team-member-dialog.component';
 
 @Component({
     selector: 'app-team-members',

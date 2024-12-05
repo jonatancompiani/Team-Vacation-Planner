@@ -1,12 +1,12 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Holiday } from '../models/Holiday';
-import { TeamMemberService } from '../services/teamMember.service';
-import { HolidayService } from '../services/holiday.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { TeamMember } from '../models/TeamMember';
+import { TeamMember } from 'src/app/models/TeamMember';
+import { Holiday } from 'src/app/models/Holiday';
+import { HolidayService } from 'src/app/services/holiday.service';
+import { TeamMemberService } from 'src/app/services/teamMember.service';
+
 
 
 export interface YearTableItem {
