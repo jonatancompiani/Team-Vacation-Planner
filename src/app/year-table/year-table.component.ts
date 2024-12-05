@@ -3,9 +3,10 @@ import { MatTable } from '@angular/material/table';
 import { DayData, YearTableDataSource, YearTableItem } from './year-table-datasource';
 
 @Component({
-  selector: 'app-year-table',
-  templateUrl: './year-table.component.html',
-  styleUrls: ['./year-table.component.sass']
+    selector: 'app-year-table',
+    templateUrl: './year-table.component.html',
+    styleUrls: ['./year-table.component.sass'],
+    standalone: false
 })
 export class YearTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<YearTableItem>;

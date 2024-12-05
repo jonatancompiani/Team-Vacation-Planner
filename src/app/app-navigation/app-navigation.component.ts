@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-app-navigation',
-  templateUrl: './app-navigation.component.html',
-  styleUrls: ['./app-navigation.component.css']
+    selector: 'app-app-navigation',
+    templateUrl: './app-navigation.component.html',
+    styleUrls: ['./app-navigation.component.css'],
+    standalone: false
 })
 export class AppNavigationComponent {
 

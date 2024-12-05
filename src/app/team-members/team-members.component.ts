@@ -6,9 +6,10 @@ import { TeamMemberService } from '../services/teamMember.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-team-members',
-  templateUrl: './team-members.component.html',
-  styleUrls: ['./team-members.component.sass']
+    selector: 'app-team-members',
+    templateUrl: './team-members.component.html',
+    styleUrls: ['./team-members.component.sass'],
+    standalone: false
 })
 export class TeamMembersComponent {
 
