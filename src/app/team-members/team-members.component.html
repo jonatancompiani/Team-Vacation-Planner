@@ -1,7 +1,7 @@
 <mat-grid-list cols="1" rowHeight="1rem">
 
     <mat-grid-tile rowspan="3">
-        <h1>Team</h1>
+        <h1>Team Member</h1>
     </mat-grid-tile>
 
     <mat-grid-tile rowspan="5">
@@ -38,10 +38,10 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let item">
-                    <button mat-icon-button color="primary" aria-label="Edit Item">
+                    <button mat-icon-button color="primary" aria-label="Edit Item" (click)="edit(item)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" aria-label="Delete Item" (click)="delete()">
+                    <button mat-icon-button color="warn" aria-label="Delete Item" (click)="delete(item.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>

@@ -12,7 +12,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -24,6 +24,10 @@ import { TeamMembersComponent } from './team-members/team-members.component';
 import { TeamMemberDialogComponent } from './team-member-dialog/team-member-dialog.component';       
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TeamComponent } from './team/team.component';
+import { AddTeamDialogComponent } from './add-team-dialog/add-team-dialog.component';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppNavigationComponent,
     TeamMembersComponent,
     TeamMemberDialogComponent,
+    TeamComponent,
+    AddTeamDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +59,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AngularFireDatabaseModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatError,
+    BrowserModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

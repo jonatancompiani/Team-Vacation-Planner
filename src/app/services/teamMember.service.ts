@@ -20,11 +20,11 @@ export class TeamMemberService {
   getAll() {
     return this.collection.valueChanges();
    }
- 
-   create(data: TeamMember): any {
-     return this.collection.add({ ...data });
-   }
- 
+  
+   create(team: TeamMember) {
+    return this.firestore.collection(this.dbPath).add(team);
+  }
+
    update(id: string, data: any): Promise<void> {
      return this.collection.doc(id).update(data);
    }

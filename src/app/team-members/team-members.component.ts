@@ -18,20 +18,58 @@ export class TeamMembersComponent {
   constructor(
     public dialog: MatDialog, 
     private teamMemberService: TeamMemberService,
-    private _snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar) {
     this.teamMemberService.getAll().subscribe(data => {
       this.dataSource = data;
     });
   }
 
   displayedColumns: string[] = ['code', 'color', 'name', 'pictureUrl', 'action'];
-
-  openDialog() {
-    this.dialog.open(TeamMemberDialogComponent);
+  
+  ngOnInit(): void {
+    this.loadTeams();
   }
 
-  delete() {
-    this._snackBar.open("Item Removed");
+  loadTeams() {
+    this.teamMemberService.getAll().subscribe((data) => {
+      this.dataSource = data;
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TeamMemberDialogComponent, {
+      width: '400px',
+      data: { isEdit: false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.teamMemberService.create(result).then(() => {
+          this.snackBar.open('Team added successfully!', 'Close', { duration: 3000 });
+        });
+      }
+    });
+  }
+
+  delete(id: string) {
+    this.teamMemberService.delete(id).then(() => {
+      this.snackBar.open('Team deleted successfully!', 'Close', { duration: 3000 });
+    });
+  }
+
+  edit(teamMember: TeamMember) {
+    const dialogRef = this.dialog.open(TeamMemberDialogComponent, {
+      width: '400px',
+      data: { teamMember, isEdit: true }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.teamMemberService.update(teamMember.id!, result).then(() => {
+          this.snackBar.open('Team updated successfully!', 'Close', { duration: 3000 });
+        });
+      }
+    });
   }
 
 }

@@ -1,5 +1,35 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-</div>
+<h2 mat-dialog-title>Add New Member</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="teamMemberForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="teamMemberForm.get('name')?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Code</mat-label>
+      <textarea matInput formControlName="code" required></textarea>
+      <mat-error *ngIf="teamMemberForm.get('code')?.hasError('required')">Code is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Color</mat-label>
+      <textarea matInput formControlName="color" required></textarea>
+      <mat-error *ngIf="teamMemberForm.get('color')?.hasError('required')">Color is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Picture</mat-label>
+      <textarea matInput formControlName="pictureUrl" required></textarea>
+      <mat-error *ngIf="teamMemberForm.get('pictureUrl')?.hasError('required')">Picture is required</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cancel</button>
+  <button mat-button color="primary" (click)="onSave()" [disabled]="teamMemberForm.invalid">Save</button>
+</mat-dialog-actions>

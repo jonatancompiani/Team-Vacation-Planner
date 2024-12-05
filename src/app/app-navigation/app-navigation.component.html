@@ -13,6 +13,11 @@
         <div matListItemTitle>Teams</div>
       </mat-list-item>
 
+      <mat-list-item routerLink="/members" (click)="drawer.toggle()">
+        <mat-icon matListItemIcon>person_outline</mat-icon>
+        <div matListItemTitle>Members</div>
+      </mat-list-item>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
