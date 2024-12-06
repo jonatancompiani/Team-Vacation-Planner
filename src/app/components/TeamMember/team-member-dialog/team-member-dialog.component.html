@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add New Member</h2>
 
-<mat-dialog-content>
+<mat-dialog-content  class="mat-typography">
   <form [formGroup]="teamMemberForm" class="form-container">
 
     <!-- Name Field -->
@@ -39,18 +39,27 @@
       </mat-form-field>
     </div>
 
+    <mat-divider></mat-divider>
+
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Select Team</mat-label>
-      <mat-select formControlName="team" required>
-        <mat-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</mat-option>
+      <mat-select formControlName="team" required (selectionChange)="addTeam($event.value)">
+        <mat-option *ngFor="let team of teams" [value]="team">{{ team.name }}</mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-chip-grid formControlName="selectedTeams" #chipGrid>
+      <mat-chip *ngFor="let team of selectedTeams" [removable]="true" (removed)="removeTeam(team)" >
+        {{ team.name }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-grid>
   
   </form>
   
 </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button mat-button (click)="onClose()">Cancel</button>
-  <button mat-button color="primary" (click)="onSave()" [disabled]="teamMemberForm.invalid">Save</button>
+<mat-dialog-actions align="end">
+  <button mat-flat-button (click)="onClose()">Cancel</button>
+  <button mat-flat-button cdkFocusInitial color="accent" (click)="onSave()" [disabled]="teamMemberForm.invalid">Save</button>
 </mat-dialog-actions>
