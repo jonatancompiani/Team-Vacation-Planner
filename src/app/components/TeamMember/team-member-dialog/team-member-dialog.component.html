@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add New Member</h2>
 
-<mat-dialog-content  class="mat-typography">
+<mat-dialog-content class="mat-typography">
   <form [formGroup]="teamMemberForm" class="form-container">
 
     <!-- Name Field -->
@@ -11,24 +11,17 @@
         Name is required
       </mat-error>
     </mat-form-field>
-  
+
     <!-- Color Field -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Color</mat-label>
-      <input type="color" matInput formControlName="color" required />
-      <mat-error *ngIf="teamMemberForm.get('color')?.hasError('required')">
-        Color is required
-      </mat-error>
+      <input type="color" formControlName="color" matInput />
     </mat-form-field>
-  
+
     <!-- Picture URL and Image Display -->
     <div class="picture-container">
       <div class="image-preview" *ngIf="teamMemberForm.get('pictureUrl')?.value">
-        <img
-          matChipAvatar
-          [src]="teamMemberForm.get('pictureUrl')?.value"
-          alt="Team Member Picture"
-        />
+        <img matChipAvatar [src]="teamMemberForm.get('pictureUrl')?.value" alt="Team Member Picture" />
       </div>
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Picture URL</mat-label>
@@ -43,23 +36,23 @@
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Select Team</mat-label>
-      <mat-select formControlName="team" required (selectionChange)="addTeam($event.value)">
-        <mat-option *ngFor="let team of teams" [value]="team">{{ team.name }}</mat-option>
+      <mat-select required (selectionChange)="addTeam($event.value)">
+        <mat-option *ngFor="let team of teams || []" [value]="team">{{ team.name }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-chip-grid formControlName="selectedTeams" #chipGrid>
-      <mat-chip *ngFor="let team of selectedTeams" [removable]="true" (removed)="removeTeam(team)" >
-        {{ team.name }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-grid>
-  
+    <mat-chip style="max-width: fit-content;" *ngFor="let teamCtrl of selectedTeamsFormArray.controls; let i = index"
+      [removable]="true" (removed)="removeTeam(teamCtrl.value)">
+      {{ teamCtrl.value.name }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+
   </form>
-  
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-flat-button (click)="onClose()">Cancel</button>
-  <button mat-flat-button cdkFocusInitial color="accent" (click)="onSave()" [disabled]="teamMemberForm.invalid">Save</button>
+  <button mat-flat-button cdkFocusInitial color="accent" (click)="onSave()"
+    [disabled]="teamMemberForm.invalid">Save</button>
 </mat-dialog-actions>

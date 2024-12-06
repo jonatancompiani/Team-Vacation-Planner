@@ -13,7 +13,6 @@ export class TeamMemberDialogComponent {
 
   teamMemberForm: FormGroup;
   teams: Team[] = [];
-  selectedTeams: Team[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<TeamMemberDialogComponent>,
@@ -24,7 +23,8 @@ export class TeamMemberDialogComponent {
     this.teamMemberForm = this.fb.group({
       name: ['', [Validators.required]],
       color: [''],
-      pictureUrl: [''],
+      pictureUrl: ['', [Validators.required]],
+      selectedTeams: this.fb.array([]),
     });
 
     if (data && data.isEdit && data.teamMember) {
@@ -32,8 +32,14 @@ export class TeamMemberDialogComponent {
         name: data.teamMember.name,
         color: data.teamMember.color,
         pictureUrl: data.teamMember.pictureUrl,
-        selectedTeams: this.fb.array([]), 
       });
+
+      if (Array.isArray(data.teamMember.selectedTeams)) {
+        const teamsArray = this.teamMemberForm.get('selectedTeams') as FormArray;
+        data.teamMember.selectedTeams.forEach((team: Team) =>
+          teamsArray.push(this.fb.control(team))
+        );
+      }
     }
   }
 
@@ -57,20 +63,21 @@ export class TeamMemberDialogComponent {
     return this.teamMemberForm.get('selectedTeams') as FormArray;
   }
 
-    // Add team to selected teams (FormArray)
-    addTeam(team: any) {
-      if (!this.selectedTeams.includes(team)) {
-        this.selectedTeams.push(team);
-        this.selectedTeamsFormArray.push(this.fb.control(team));
-      }
+  // Add team to selected teams (FormArray)
+  addTeam(team: Team) {
+    const existingTeams = this.selectedTeamsFormArray.value;
+    if (!existingTeams.some((t: Team) => t.id === team.id)) { // Assuming `id` uniquely identifies a team
+      this.selectedTeamsFormArray.push(this.fb.control(team));
     }
+  }
   
-    // Remove team from selected teams (FormArray)
-    removeTeam(team: any) {
-      const index = this.selectedTeams.indexOf(team);
-      if (index >= 0) {
-        this.selectedTeams.splice(index, 1);
-        this.selectedTeamsFormArray.removeAt(index);
-      }
+
+  // Remove team from selected teams (FormArray)
+  removeTeam(team: Team) {
+    const index = this.selectedTeamsFormArray.value.findIndex((t: Team) => t.id === team.id);
+    if (index >= 0) {
+      this.selectedTeamsFormArray.removeAt(index);
     }
+  }
+  
 }

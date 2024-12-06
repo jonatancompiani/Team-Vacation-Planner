@@ -14,6 +14,21 @@
       <textarea matInput formControlName="description"></textarea>
       <mat-error *ngIf="teamForm.get('description')?.hasError('required')">Description is required</mat-error>
     </mat-form-field>
+
+    <div class="picture-container">
+      <div class="image-preview" *ngIf="teamForm.get('holidayCalendar')?.value">
+        <img matChipAvatar src="https://flagsapi.com/{{teamForm.get('holidayCalendar')?.value}}/flat/48.png" />
+      </div>
+      <mat-form-field appearance="fill" class="dropdown">
+        <mat-label>Holiday Calendar</mat-label>
+        <mat-select formControlName="holidayCalendar">
+          <mat-option value="">None</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     
   </form>
 </mat-dialog-content>

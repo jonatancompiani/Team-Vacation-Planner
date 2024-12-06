@@ -6,6 +6,7 @@ export interface Team {
   id?: string;
   name: string;
   description: string;
+  holidayCalendar: string;
 }
 
 @Injectable({
