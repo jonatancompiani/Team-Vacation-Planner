@@ -27,6 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
+              "src/CNAME",
               "src/favicon.ico",
               "src/assets"
             ],
@@ -97,6 +98,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "sass",
             "assets": [
+              "src/CNAME",
               "src/favicon.ico",
               "src/assets"
             ],
