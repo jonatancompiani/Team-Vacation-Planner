@@ -2,34 +2,78 @@
 import { TeamMember } from '../models/TeamMember';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { catchError, forkJoin, map, mergeMap, Observable, of, take } from 'rxjs';
+import { TeamAssociationService } from './teamAssociations.service';
+
+export interface UserEnriched {
+  id?: string;
+  color: string;
+  name: string;
+  pictureUrl: string;
+  vacations: Date[];
+  teamNames: string[];
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamMemberService {
 
-  private dbPath = '/TeamMembers';
+  private collectionName = '/TeamMembers';
 
   collection: AngularFirestoreCollection<TeamMember>;
 
+  constructor
+    (
+      private afs: AngularFirestore,
+      private teamAssociationService: TeamAssociationService,
+    ) {
+    this.collection = afs.collection(this.collectionName);
+  }
 
-  constructor(private firestore: AngularFirestore) {
-    this.collection = firestore.collection(this.dbPath);
+  getById(id: string): Observable<TeamMember | undefined> {
+    return this.afs.collection<TeamMember>(this.collectionName).doc(id).valueChanges();
   }
 
   getAll() {
-    return this.firestore.collection<TeamMember>(this.dbPath).valueChanges({ idField: 'id' });
-   }
-  
-   create(team: TeamMember) {
-    return this.firestore.collection(this.dbPath).add(team);
+    return this.afs.collection<TeamMember>(this.collectionName).valueChanges({ idField: 'id' });
   }
 
-   update(id: string, data: any): Promise<void> {
-     return this.firestore.collection(this.dbPath).doc(id).update(data);
-   }
- 
-   delete(id: string): Promise<void> {
-     return this.collection.doc(id).delete();
-   }
+  create(team: TeamMember) {
+    return this.afs.collection(this.collectionName).add(team);
+  }
+
+  update(id: string, data: any): Promise<void> {
+    return this.afs.collection(this.collectionName).doc(id).update(data);
+  }
+
+  delete(id: string): Promise<void> {
+    return this.collection.doc(id).delete();
+  }
+
+  getAllWithTeamNames(): Observable<UserEnriched[]> {
+    return this.afs.collection<UserEnriched>(this.collectionName)
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        take(1), // Ensure we only get one value from the collection
+        mergeMap(users => {
+
+          const userObservables = users.map(user =>
+            this.teamAssociationService.getEnrichedTeamAssociations(user.id).pipe(
+              take(1), // Ensure the observable completes
+              map(returnedValue => ({
+                ...user,
+                teamNames: (returnedValue || [])
+                  .map(x => x.teamName)
+                  .filter((teamName): teamName is string => !!teamName)
+              })),
+              catchError(() => of({ ...user, teamNames: [] })) // Handle errors
+            )
+          );
+
+          // Combine all user observables into a single observable
+          return forkJoin(userObservables);
+        })
+      );
+  }
 }

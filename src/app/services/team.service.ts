@@ -21,6 +21,10 @@ export class TeamService {
     return this.afs.collection<Team>(this.collectionName).valueChanges({ idField: 'id' });
   }
 
+  getById(id: string): Observable<Team | undefined> {
+    return this.afs.collection<Team>(this.collectionName).doc(id).valueChanges();
+  }
+
   addTeam(team: Team) {
     return this.afs.collection(this.collectionName).add(team);
   }

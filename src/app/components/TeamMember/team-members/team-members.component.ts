@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TeamMember } from 'src/app/models/TeamMember';
-import { TeamMemberService } from 'src/app/services/teamMember.service';
+import { TeamMemberService, UserEnriched } from 'src/app/services/teamMember.service';
 import { TeamMemberDialogComponent } from '../team-member-dialog/team-member-dialog.component';
+import { TeamAssociationService } from 'src/app/services/teamAssociations.service';
+import { Team } from 'src/app/services/team.service';
+
 
 @Component({
     selector: 'app-team-members',
@@ -13,25 +16,22 @@ import { TeamMemberDialogComponent } from '../team-member-dialog/team-member-dia
 })
 export class TeamMembersComponent {
 
-  dataSource: TeamMember[] = [];
+  dataSource: UserEnriched[] = [];
 
   constructor(
     public dialog: MatDialog, 
     private teamMemberService: TeamMemberService,
     private snackBar: MatSnackBar) {
-    this.teamMemberService.getAll().subscribe(data => {
-      this.dataSource = data;
-    });
   }
 
-  displayedColumns: string[] = ['picture', 'name', 'color',  'action'];
+  displayedColumns: string[] = ['picture', 'name', 'color', 'teams', 'action'];
   
   ngOnInit(): void {
     this.loadTeams();
   }
 
   loadTeams() {
-    this.teamMemberService.getAll().subscribe((data) => {
+    this.teamMemberService.getAllWithTeamNames().subscribe((data) => {
       this.dataSource = data;
     });
   }
