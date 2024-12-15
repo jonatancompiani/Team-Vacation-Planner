@@ -65,7 +65,7 @@ import { YearTableComponent } from './components/Calendar/year-table/year-table.
     MatFormFieldModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
 
   ],
   providers: [],

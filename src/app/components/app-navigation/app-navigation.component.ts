@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { ThemeService } from 'src/themes/theme.service';
 
 @Component({
     selector: 'app-app-navigation',
@@ -11,12 +12,21 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class AppNavigationComponent {
 
+  isDarkMode = true;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver, 
+    private themeService: ThemeService
+  ) {}
 
+  toggleTheme(isDarkMode: boolean): void {
+    this.isDarkMode = isDarkMode;
+    this.themeService.setDarkTheme(isDarkMode);
+  }
 }

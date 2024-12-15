@@ -1,20 +1,35 @@
-$primary: #3F51B5;
-$main-background: #FAFAFA;
-$component-background: white;
+$highlighted-text-color: white;
+$valid-day-background-color: aliceblue;
+$weekend-text-color: grey;
+$weekend-background-color: #edeaea;
+$invalid-days-background-color: #FAFAFA;
+$past-date-text-color: lightgrey;
+$today-background-color: red;
+$holiday-background-color: salmon;
+
+// -----------Experimenting with colors-----------
+// $highlighted-text-color: white;
+// $valid-day-background-color: aliceblue;
+// $weekend-text-color: grey;
+// $weekend-background-color: #edeaea;
+// $invalid-days-background-color: primary;
+// $past-date-text-color: lightgrey;
+// $today-background-color: red;
+// $holiday-background-color: salmon;
+
 
 .validday {
-  background-color: aliceblue;
+  background-color: $valid-day-background-color;
   transition-duration: 200ms;
 }
 .validday:hover {
-  background-color: $primary;
-  color: $component-background;
   cursor: pointer;
   border-radius: 25px;
 }
 .mat-elevation-z8 {
   overflow-x: auto;
 }
+
 .mat-column-sun1,
 .mat-column-sat1,
 .mat-column-sun2,
@@ -26,12 +41,10 @@ $component-background: white;
 .mat-column-sun5,
 .mat-column-sat5,
 .mat-column-sun6 {
-  background-color: #edeaea;
-  color: grey;
+  background-color: $weekend-background-color;
+  color: $weekend-text-color;
 }
-.filler {
-  background-color: #FAFAFA;
-}
+
 td {
   text-align: center;
 }
@@ -54,11 +67,11 @@ table {
   margin-left: 30px;
 }
 .pastdate {
-  color: lightgrey;
+  color: $past-date-text-color;
 }
 .holiday {
-  background-color: lightsalmon !important;
-  color: white;
+  background-color: $holiday-background-color !important;
+  color: $highlighted-text-color;
 }
 .mat-mdc-table {
   height: 47px;
@@ -67,7 +80,11 @@ table {
   background-size: cover;
 }
 .today {
-  background: red !important;
-  color: white;
+  background-color: $today-background-color !important;
+  color: $highlighted-text-color;
   border-radius: 30px;
+}
+
+.filler {
+  background-color: $invalid-days-background-color !important;
 }

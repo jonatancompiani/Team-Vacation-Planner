@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-.mat-drawer-content{
+.mat-drawer-content {
   overflow: visible;
 }
 
@@ -16,6 +16,15 @@
   z-index: 1;
 }
 
-body{
-  margin: 0px;  
+body {
+  margin: 0px;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+
+  .spacer {
+    flex: 1; /* Pushes the next element to the right */
+  }
 }

@@ -20,22 +20,25 @@
 
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="">
+  <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-       >
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>
         Team Vacation Planner
       </span>
+
+      <span class="spacer"></span>
+
+      <button type="button" mat-icon-button (click)="toggleTheme(!isDarkMode)">
+        <mat-icon *ngIf="isDarkMode">light_mode</mat-icon>
+        <mat-icon *ngIf="!isDarkMode">dark_mode</mat-icon>
+      </button>
+
     </mat-toolbar>
 
     <router-outlet></router-outlet>
-    
+
   </mat-sidenav-content>
 </mat-sidenav-container>
