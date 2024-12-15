@@ -1,41 +1,61 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
+// Light Theme
+$light-background: mat.m2-define-palette(mat.$m2-grey-palette);
 $light-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
 $light-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-$light-theme: mat.m2-define-light-theme((
-  color: (
-    primary: $light-primary,
-    accent: $light-accent,
-  ),
-));
-
-// Define your dark theme
-$dark-primary: mat.m2-define-palette(mat.$m2-blue-grey-palette);
-$dark-accent: mat.m2-define-palette(mat.$m2-lime-palette, A200, A100, A400);
-$dark-theme: mat.m2-define-dark-theme((
-  color: (
-    primary: $dark-primary,
-    accent: $dark-accent,
-  ),
-));
+$light-attention: mat.m2-define-palette(mat.$m2-red-palette);
+$light-warn: mat.m2-define-palette(mat.$m2-orange-palette);
 
 // Light theme styles
 .light-theme {
-  @include mat.all-component-colors($light-theme);
+  @include mat.all-component-colors(mat.m2-define-light-theme((
+    color: (
+      primary: $light-primary,
+      accent: $light-accent
+    )
+  )));
+  --primary-color: #{mat.m2-get-color-from-palette($light-primary)};
+  --accent-color: #{mat.m2-get-color-from-palette($light-accent)};
+  --bg1: #{mat.m2-get-color-from-palette($light-background, 200)};
+  --bg2: #{mat.m2-get-color-from-palette($light-background, 50)};
+  --bg3: #{mat.m2-get-color-from-palette($light-background, 300)};
+  --attention: #{mat.m2-get-color-from-palette($light-warn, 'darker' )};
+  --attention-intense: #{mat.m2-get-color-from-palette($light-attention, 'darker')};
+  --secondary-text: #{mat.m2-get-color-from-palette($light-background, 400)};
 }
+
+// Dark Theme
+$dark-background: mat.m2-define-palette(mat.$m2-grey-palette);
+$dark-primary: mat.m2-define-palette(mat.$m2-deep-purple-palette);
+$dark-accent: mat.m2-define-palette(mat.$m2-lime-palette, A200, A100, A400);
+$dark-attention: mat.m2-define-palette(mat.$m2-red-palette);
+$dark-warn: mat.m2-define-palette(mat.$m2-orange-palette);
 
 // Dark theme styles
 .dark-theme {
-  @include mat.all-component-colors($dark-theme);
+  @include mat.all-component-colors(mat.m2-define-dark-theme((
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+    )
+  )));
+  --primary-color: #{mat.m2-get-color-from-palette($dark-primary)};
+  --accent-color: #{mat.m2-get-color-from-palette($dark-accent)};
+  --bg1: #{mat.m2-get-color-from-palette($dark-background, 700)};
+  --bg2: #{mat.m2-get-color-from-palette($dark-background, 800)};
+  --bg3: #{mat.m2-get-color-from-palette($dark-background, 500)};
+  --attention: #{mat.m2-get-color-from-palette($dark-warn, 'darker' )};
+  --attention-intense: #{mat.m2-get-color-from-palette($dark-attention, 'darker')};
+  --secondary-text: #{mat.m2-get-color-from-palette($dark-background, 600)};
 }
 
-
-/* You can add global styles to this file, and also import other style files */
 body {
     margin: 0px;
 }
 
+// Imported from brebuilt theme
 .mat-ripple {
   overflow: hidden;
   position: relative
@@ -69,8 +89,6 @@ body {
   width: 1px;
   white-space: nowrap;
   outline: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   left: 0
 }
 
@@ -166,14 +184,6 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   padding: 2px 0 !important;
   box-sizing: content-box !important;
   height: 0 !important
-}
-
-@keyframes cdk-text-field-autofill-start {
-  /*!*/
-}
-
-@keyframes cdk-text-field-autofill-end {
-  /*!*/
 }
 
 .cdk-text-field-autofill-monitored:-webkit-autofill {

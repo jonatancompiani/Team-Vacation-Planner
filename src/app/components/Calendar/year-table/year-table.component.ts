@@ -78,7 +78,7 @@ export class YearTableComponent implements AfterViewInit {
       return member.color;
     }
     
-    return '#FAFAFA';
+    return '#00000000';
   }
 
   selectTeamMember(member: any) {

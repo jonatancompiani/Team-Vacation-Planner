@@ -1,22 +1,11 @@
 $highlighted-text-color: white;
-$valid-day-background-color: aliceblue;
-$weekend-text-color: grey;
-$weekend-background-color: #edeaea;
-$invalid-days-background-color: #FAFAFA;
-$past-date-text-color: lightgrey;
-$today-background-color: red;
-$holiday-background-color: salmon;
-
-// -----------Experimenting with colors-----------
-// $highlighted-text-color: white;
-// $valid-day-background-color: aliceblue;
-// $weekend-text-color: grey;
-// $weekend-background-color: #edeaea;
-// $invalid-days-background-color: primary;
-// $past-date-text-color: lightgrey;
-// $today-background-color: red;
-// $holiday-background-color: salmon;
-
+$weekend-text-color: var(--secondary-text);
+$past-date-text-color: var(--secondary-text);
+$valid-day-background-color: var(--bg1);
+$weekend-background-color: var(--bg3);
+$invalid-days-background-color: var(--bg2);
+$today-background-color: var(--attention-intense);;
+$holiday-background-color: var(--attention);;
 
 .validday {
   background-color: $valid-day-background-color;
@@ -26,23 +15,9 @@ $holiday-background-color: salmon;
   cursor: pointer;
   border-radius: 25px;
 }
+
 .mat-elevation-z8 {
   overflow-x: auto;
-}
-
-.mat-column-sun1,
-.mat-column-sat1,
-.mat-column-sun2,
-.mat-column-sat2,
-.mat-column-sun3,
-.mat-column-sat3,
-.mat-column-sun4,
-.mat-column-sat4,
-.mat-column-sun5,
-.mat-column-sat5,
-.mat-column-sun6 {
-  background-color: $weekend-background-color;
-  color: $weekend-text-color;
 }
 
 td {
@@ -59,6 +34,11 @@ tr {
   height: 50px;
   border-radius: 25px;
 }
+
+.mat-mdc-chip:not(.mat-mdc-chip-selected) {
+  background: var(--bg2);
+}
+
 table {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -81,8 +61,22 @@ table {
 }
 .today {
   background-color: $today-background-color !important;
-  color: $highlighted-text-color;
-  border-radius: 30px;
+  color: $highlighted-text-color !important;
+}
+
+.mat-column-sun1,
+.mat-column-sat1,
+.mat-column-sun2,
+.mat-column-sat2,
+.mat-column-sun3,
+.mat-column-sat3,
+.mat-column-sun4,
+.mat-column-sat4,
+.mat-column-sun5,
+.mat-column-sat5,
+.mat-column-sun6 {
+  background-color: $weekend-background-color;
+  color: $weekend-text-color;
 }
 
 .filler {
