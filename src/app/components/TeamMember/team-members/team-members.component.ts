@@ -11,7 +11,7 @@ import { Team } from 'src/app/services/team.service';
 @Component({
     selector: 'app-team-members',
     templateUrl: './team-members.component.html',
-    styleUrls: ['./team-members.component.sass'],
+    styleUrls: ['./team-members.component.scss'],
     standalone: false
 })
 export class TeamMembersComponent {

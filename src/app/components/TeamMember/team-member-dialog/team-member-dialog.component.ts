@@ -6,7 +6,7 @@ import { Team, TeamService } from 'src/app/services/team.service';
 @Component({
   selector: 'app-team-member-dialog',
   templateUrl: './team-member-dialog.component.html',
-  styleUrls: ['./team-member-dialog.component.sass'],
+  styleUrls: ['./team-member-dialog.component.scss'],
   standalone: false
 })
 export class TeamMemberDialogComponent {

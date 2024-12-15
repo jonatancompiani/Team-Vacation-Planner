@@ -6,7 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
     selector: 'app-app-navigation',
     templateUrl: './app-navigation.component.html',
-    styleUrls: ['./app-navigation.component.css'],
+    styleUrls: ['./app-navigation.component.scss'],
     standalone: false
 })
 export class AppNavigationComponent {

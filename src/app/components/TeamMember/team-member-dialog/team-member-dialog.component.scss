@@ -1,0 +1,22 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Add spacing between form fields
+}
+
+.picture-container {
+  display: flex;
+  align-items: center; // Vertically align the image and form field
+  gap: 16px; // Spacing between image and input field
+}
+
+.full-width {
+  width: 100%; // Ensures the input fields stretch to full width
+}
+
+.image-preview img {
+  width: 60px; // Set a fixed size for the image
+  height: 60px;
+  border-radius: 50%; // Makes the image circular
+  object-fit: cover; // Ensures the image covers the area without distortion
+}

@@ -9,7 +9,7 @@ import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.compo
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.sass'],
+  styleUrls: ['./team.component.scss'],
   standalone: false
 })
 export class TeamComponent implements OnInit {

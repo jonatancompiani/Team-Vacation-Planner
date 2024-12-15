@@ -5,7 +5,7 @@ import { DayData, YearTableDataSource, YearTableItem } from './year-table-dataso
 @Component({
     selector: 'app-year-table',
     templateUrl: './year-table.component.html',
-    styleUrls: ['./year-table.component.sass'],
+    styleUrls: ['./year-table.component.scss'],
     standalone: false
 })
 export class YearTableComponent implements AfterViewInit {

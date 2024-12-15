@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-add-team-dialog',
   templateUrl: './add-team-dialog.component.html',
-  styleUrls: ['./add-team-dialog.component.sass'],
+  styleUrls: ['./add-team-dialog.component.scss'],
   standalone: false
 })
 export class AddTeamDialogComponent {

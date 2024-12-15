@@ -1,0 +1,73 @@
+$primary: #3F51B5;
+$main-background: #FAFAFA;
+$component-background: white;
+
+.validday {
+  background-color: aliceblue;
+  transition-duration: 200ms;
+}
+.validday:hover {
+  background-color: $primary;
+  color: $component-background;
+  cursor: pointer;
+  border-radius: 25px;
+}
+.mat-elevation-z8 {
+  overflow-x: auto;
+}
+.mat-column-sun1,
+.mat-column-sat1,
+.mat-column-sun2,
+.mat-column-sat2,
+.mat-column-sun3,
+.mat-column-sat3,
+.mat-column-sun4,
+.mat-column-sat4,
+.mat-column-sun5,
+.mat-column-sat5,
+.mat-column-sun6 {
+  background-color: #edeaea;
+  color: grey;
+}
+.filler {
+  background-color: #FAFAFA;
+}
+td {
+  text-align: center;
+}
+tr {
+  height: 47px !important;
+}
+.mat-mdc-chip-listbox {
+  padding: 0em 2em;
+}
+.mat-mdc-chip-selected {
+  font-size: 20px;
+  height: 50px;
+  border-radius: 25px;
+}
+table {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.button-margin {
+  margin-left: 30px;
+}
+.pastdate {
+  color: lightgrey;
+}
+.holiday {
+  background-color: lightsalmon !important;
+  color: white;
+}
+.mat-mdc-table {
+  height: 47px;
+}
+.example-header-image {
+  background-size: cover;
+}
+.today {
+  background: red !important;
+  color: white;
+  border-radius: 30px;
+}
