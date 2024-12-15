@@ -49,19 +49,12 @@ table {
 .pastdate {
   color: $past-date-text-color;
 }
-.holiday {
-  background-color: $holiday-background-color !important;
-  color: $highlighted-text-color;
-}
+
 .mat-mdc-table {
   height: 47px;
 }
 .example-header-image {
   background-size: cover;
-}
-.today {
-  background-color: $today-background-color !important;
-  color: $highlighted-text-color !important;
 }
 
 .mat-column-sun1,
@@ -81,4 +74,22 @@ table {
 
 .filler {
   background-color: $invalid-days-background-color !important;
+}
+
+mat-grid-list {
+  height: 93vh;
+}
+
+.table-container {
+  height: calc(100vh - 220px);
+}
+
+.holiday {
+  background-color: $holiday-background-color !important;
+  color: $highlighted-text-color;
+}
+
+.today {
+  background-color: $today-background-color !important;
+  color: $highlighted-text-color !important;
 }

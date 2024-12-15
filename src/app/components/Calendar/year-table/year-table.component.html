@@ -1,5 +1,5 @@
 
-<mat-grid-list cols="1" rowHeight="1rem">
+<mat-grid-list cols="1" rowHeight="fit">
 
   <mat-grid-tile rowspan="3" >
     <div class="example-button-row">
@@ -9,7 +9,7 @@
     </div>
   </mat-grid-tile>
 
-    <mat-grid-tile rowspan="7" >
+    <mat-grid-tile rowspan="5" >
       <mat-chip-listbox >
         <mat-chip *ngFor="let member of dataSource.teamMembers" 
           [ngStyle]="{'background': getMemberBackground(member), border: '2px solid ' + member.color}"
@@ -20,7 +20,8 @@
       </mat-chip-listbox>
   </mat-grid-tile>
 
-  <mat-grid-tile rowspan="39">
+  <mat-grid-tile rowspan="35">
+    <div class="table-container">
     <section class="mat-elevation-z8" tabindex="0" 
       [ngStyle]="{'border': '5px solid ' + dataSource.selectedMemberColor}">
 
@@ -47,6 +48,7 @@
 
       </table>
     </section>
+  </div>
   </mat-grid-tile>
 </mat-grid-list>
 <!-- <button (click)="gen()">generate table</button>
