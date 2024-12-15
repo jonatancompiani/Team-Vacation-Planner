@@ -1,7 +1,7 @@
 <mat-grid-list cols="1" rowHeight="fit">
 
   <mat-grid-tile rowspan="3">
-    <h1>Team Member {{dataSource.length}}</h1>
+    <h1>Team Member</h1>
   </mat-grid-tile>
 
   <mat-grid-tile rowspan="5">
@@ -46,7 +46,7 @@
           <th mat-header-cell *matHeaderCellDef> Teams </th>
           <td mat-cell *matCellDef="let item">
             <mat-chip-set>
-              <mat-chip *ngFor="let team of item.teamNames" color="primary" selectable="false" removable="false">
+              <mat-chip *ngFor="let team of item.teamNames" selectable="false" removable="false">
                 {{ team }}
               </mat-chip>
             </mat-chip-set>
