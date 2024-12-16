@@ -63,6 +63,15 @@ export class TeamAssociationService {
     );
   }
 
+  getCountById(teamId: string): Promise<number> {
+    const items = this.afs.collection<TeamAssociation>(this.collectionName)
+      .ref.where('teamId', '==', teamId)
+      .get()
+      .then(snapshot => snapshot.docs.length);
+    
+    return items;
+  }
+
   create(team: TeamAssociation) {
     return this.afs.collection(this.collectionName).add(team);
   }

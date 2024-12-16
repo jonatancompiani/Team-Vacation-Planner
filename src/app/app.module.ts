@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TeamComponent } from './components/Team/team/team.component';
 import { TeamMembersComponent } from './components/TeamMember/team-members/team-members.component';
 import { YearTableComponent } from './components/Calendar/year-table/year-table.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { YearTableComponent } from './components/Calendar/year-table/year-table.
     ReactiveFormsModule,
     MatSelectModule,
     MatInputModule,
-
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,43 @@
+<mat-grid-list cols="1" rowHeight="fit">
+  <mat-grid-tile rowspan="1">
+    <h1>Team Calendars</h1>
+  </mat-grid-tile>
+
+  <mat-grid-tile rowspan="10 " class="team-list-tile">
+
+    <div class="team-cards-container">
+      <ng-container *ngFor="let team of teams">
+        <mat-card class="team-card" appearance="outlined">
+
+          <mat-card-header>
+            <mat-card-title>
+              {{ team.name }}
+            </mat-card-title>
+            <span class="spacer"></span>
+            <img matChipAvatar *ngIf="!!team.holidayCalendar"
+              src="https://flagsapi.com/{{team.holidayCalendar}}/flat/32.png"
+              title="Holidays from {{team.holidayCalendar}}" />
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>{{ team.description }}</p>
+          </mat-card-content>
+
+          <span class="spacer"></span>
+
+          <mat-card-actions>
+            <div class="footer-content">
+              <mat-icon>people</mat-icon>
+              <span class="team-number">{{team.userCount}}</span>
+            </div>
+            <span class="spacer"></span>
+            <div>
+              <button mat-button color="accent">View</button>
+            </div>
+
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

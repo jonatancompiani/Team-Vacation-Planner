@@ -1,0 +1,70 @@
+mat-grid-list {
+    height: 93vh;
+}
+
+mat-grid-tile {
+    padding: 16px;
+}
+
+p {
+    max-height: 80px;
+    overflow: auto;
+}
+
+.table-container {
+    height: calc(100vh - 150px); // Adjust based on your header and buttons
+    padding: 16px;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+table.mat-elevation-z8 {
+    width: 100%;
+}
+
+.team-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+.team-card {
+    width: 300px;
+    height: 150px;
+    position: relative;
+}
+
+mat-card-footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* Align items vertically */
+    padding: 8px 16px;
+    /* Adjust padding for better spacing */
+    flex: auto
+}
+
+.footer-content {
+    display: flex;
+    align-items: center; /* Align the icon and number vertically */
+    gap: 8px; /* Add spacing between the icon and number */
+    margin-left: 10px;
+}
+
+.team-number {
+    font-size: 14px;
+    font-weight: bold;
+    color: #616161;
+}
+
+
+.team-list-tile {
+    display: flex;
+    flex-direction: column;
+    /* Ensure grid tile content aligns top-down */
+    align-items: flex-start;
+    /* Align items to the top-left */
+    justify-content: flex-start;
+    /* Ensure content aligns to the top of the grid tile */
+}

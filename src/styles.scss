@@ -51,9 +51,16 @@ $dark-warn: mat.m2-define-palette(mat.$m2-orange-palette);
   --secondary-text: #{mat.m2-get-color-from-palette($dark-background, 600)};
 }
 
+// Custom Stuff
+
 body {
     margin: 0px;
 }
+
+.spacer {
+  flex: 1; /* Pushes the next element to the right */
+}
+
 
 // Imported from brebuilt theme
 .mat-ripple {
