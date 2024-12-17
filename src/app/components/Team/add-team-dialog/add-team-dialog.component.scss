@@ -2,8 +2,19 @@
   width: 100%;
 }
 
+.picture-container {
+  display: flex;
+  align-items: center;
+  vertical-align: top;
+  
+}
+
 .image-preview img {
-  width: 48px; // Adjust the size of the flag image
+  width: 48px;
   height: 48px;
-  object-fit: cover;  // Ensure the image fits nicely
+  object-fit: cover;
+  margin-right: 16px;
+}
+mat-form-field.dropdown {
+  flex: 2;
 }
