@@ -32,6 +32,15 @@ export class TeamAssociationService {
       .valueChanges({ idField: 'id' });
   }
 
+  getByTeamId(userId: string): Observable<TeamAssociation[]> {
+    return this.afs
+      .collection<TeamAssociation>(
+        this.collectionName,
+        (ref) => ref.where('teamId', '==', userId)
+      )
+      .valueChanges({ idField: 'id' });
+  }
+
   getEnrichedTeamAssociations(userId: string): Observable<TeamAssociation[]> {
     return this.getByUserId(userId).pipe(
       take(1), // Ensures the observable completes after emitting the first value

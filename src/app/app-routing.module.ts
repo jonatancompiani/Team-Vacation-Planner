@@ -6,9 +6,9 @@ import { YearTableComponent } from './components/Calendar/year-table/year-table.
 import { DashboardComponent } from './components/Calendar/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: YearTableComponent },
+  { path: '', component: DashboardComponent },
+  { path: 'calendar/:id', component: YearTableComponent },
   { path: 'members', component: TeamMembersComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'teams', component: TeamComponent }
 ];
 

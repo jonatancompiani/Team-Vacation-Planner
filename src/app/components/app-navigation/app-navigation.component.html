@@ -6,14 +6,9 @@
       <!-- All Icons -->
       <!-- https://fonts.google.com/icons?icon.set=Material+Icons -->
 
-      <mat-list-item routerLink="/dashboard" (click)="drawer.toggle()">
-        <mat-icon matListItemIcon>dashboards</mat-icon>
-        <div matListItemTitle>Dashboards</div>
-      </mat-list-item>
-
       <mat-list-item routerLink="/" (click)="drawer.toggle()">
-        <mat-icon matListItemIcon>calendar_today</mat-icon>
-        <div matListItemTitle>Year Calendar</div>
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <div matListItemTitle>Dashboard</div>
       </mat-list-item>
 
       <mat-list-item routerLink="/teams" (click)="drawer.toggle()">
@@ -33,9 +28,9 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>
-        Team Vacation Planner
-      </span>
+        <span (click)="goHome()" class="title">
+          Team Vacation Planner
+        </span>
 
       <span class="spacer"></span>
 

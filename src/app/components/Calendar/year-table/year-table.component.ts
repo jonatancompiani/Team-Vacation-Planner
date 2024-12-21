@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { DayData, YearTableDataSource, YearTableItem } from './year-table-datasource';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-year-table',
@@ -8,7 +9,7 @@ import { DayData, YearTableDataSource, YearTableItem } from './year-table-dataso
     styleUrls: ['./year-table.component.scss'],
     standalone: false
 })
-export class YearTableComponent implements AfterViewInit {
+export class YearTableComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<YearTableItem>;
   dataSource: YearTableDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -21,11 +22,19 @@ export class YearTableComponent implements AfterViewInit {
     'sun6', 'mon6'
   ];
 
-  constructor(private ds: YearTableDataSource) {
+  constructor
+  (
+    private ds: YearTableDataSource,
+    private route: ActivatedRoute
+  ) {
     this.dataSource = ds;
   }
 
-  ngAfterViewInit(): void {
+  teamId: string = '';
+
+  ngOnInit(): void {
+    this.teamId = this.route.snapshot.paramMap.get('id') || '';
+    this.dataSource.loadTeamData(this.teamId);
   }
 
   getCellClasses(day: DayData): string {

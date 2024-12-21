@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { TeamService } from 'src/app/services/team.service';
 import { TeamAssociationService } from 'src/app/services/teamAssociations.service';
 
@@ -35,6 +36,7 @@ export class DashboardComponent {
   constructor(
     private teamService: TeamService,
     private teamAssocService: TeamAssociationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,10 @@ export class DashboardComponent {
         this.teams = teams;
       });
     });
+  }
+
+  openCalendar(id: string | undefined) {
+    this.router.navigate(['/calendar', id]);
   }
 
 }

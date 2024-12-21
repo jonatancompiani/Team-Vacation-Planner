@@ -6,6 +6,8 @@ import { TeamMember } from 'src/app/models/TeamMember';
 import { Holiday } from 'src/app/models/Holiday';
 import { HolidayService } from 'src/app/services/holiday.service';
 import { TeamMemberService } from 'src/app/services/teamMember.service';
+import { TeamAssociationService } from 'src/app/services/teamAssociations.service';
+import { forkJoin, mergeMap, take } from 'rxjs';
 
 
 
@@ -78,7 +80,8 @@ export class YearTableDataSource {
   constructor
     (
       private holidayService: HolidayService,
-      private teamMemberService: TeamMemberService
+      private teamMemberService: TeamMemberService,
+      private teamAssociationService: TeamAssociationService
     ) {
 
     this.selectedYear = new Date().getFullYear();
@@ -88,12 +91,33 @@ export class YearTableDataSource {
       this.fillTable()
     });
 
-    this.teamMemberService.getAll().subscribe(data => {
-      this.teamMembers = data;
-      this.fillTable()
-    });
-
     this.generateTable();
+  }
+
+  async loadTeamData(teamId: string) {
+
+    this.teamMembers = [];
+
+    this.teamAssociationService.getByTeamId(teamId).pipe(
+      mergeMap(data => {
+        const requests = data.map(teamAssoc =>
+          this.teamMemberService.getById(teamAssoc.userId!).pipe(
+            take(1) // Ensure completion
+          )
+        );
+        return forkJoin(requests);
+      })
+    ).subscribe({
+      next: (members: (TeamMember | undefined)[]) => {
+    
+        this.teamMembers = members.filter((member): member is TeamMember => !!member);
+    
+        this.fillTable();
+      },
+      error: err => {
+        console.error('Error fetching team members:', err);
+      }
+    });
   }
 
   selectMember(member?: TeamMember) {
