@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Team, TeamService } from 'src/app/services/team.service';
+import { TeamMember } from 'src/app/models/TeamMember';
+import { TeamAssociation } from 'src/app/services/teamAssociations.service';
 
 @Component({
   selector: 'app-team-member-dialog',
@@ -9,6 +11,7 @@ import { Team, TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-member-dialog.component.scss'],
   standalone: false
 })
+
 export class TeamMemberDialogComponent {
 
   teamMemberForm: FormGroup;
@@ -21,6 +24,7 @@ export class TeamMemberDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { teamMember: any; isEdit: boolean }
   ) {
     this.teamMemberForm = this.fb.group({
+      id: [''],
       name: ['', [Validators.required]],
       color: [''],
       pictureUrl: ['', [Validators.required]],
@@ -28,18 +32,17 @@ export class TeamMemberDialogComponent {
     });
 
     if (data && data.isEdit && data.teamMember) {
+
       this.teamMemberForm.patchValue({
+        id: data.teamMember.id,
         name: data.teamMember.name,
         color: data.teamMember.color,
         pictureUrl: data.teamMember.pictureUrl,
       });
 
-      if (Array.isArray(data.teamMember.selectedTeams)) {
-        const teamsArray = this.teamMemberForm.get('selectedTeams') as FormArray;
-        data.teamMember.selectedTeams.forEach((team: Team) =>
-          teamsArray.push(this.fb.control(team))
-        );
-      }
+      data.teamMember.teams.forEach((team: TeamAssociation) => 
+        this.selectedTeamsFormArray.push(this.fb.control(team))
+    );
     }
   }
 
@@ -55,7 +58,17 @@ export class TeamMemberDialogComponent {
 
   onSave(): void {
     if (this.teamMemberForm.valid) {
-      this.dialogRef.close(this.teamMemberForm.value); // Close the dialog and pass the form data
+
+      var data = this.teamMemberForm.value as unknown as TeamMember;
+
+      var assoc: TeamAssociation = this.selectedTeamsFormArray.value.map((team: Team) =>
+      (
+        {
+          teamId: team.id,
+          userId: data.id
+        }
+      ));
+      this.dialogRef.close({ data: data, associations: assoc }); // Close the dialog and pass the form data
     }
   }
 
@@ -70,7 +83,6 @@ export class TeamMemberDialogComponent {
       this.selectedTeamsFormArray.push(this.fb.control(team));
     }
   }
-  
 
   // Remove team from selected teams (FormArray)
   removeTeam(team: Team) {
@@ -79,5 +91,5 @@ export class TeamMemberDialogComponent {
       this.selectedTeamsFormArray.removeAt(index);
     }
   }
-  
+
 }

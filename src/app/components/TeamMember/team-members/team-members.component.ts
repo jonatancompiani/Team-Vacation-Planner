@@ -21,6 +21,7 @@ export class TeamMembersComponent {
   constructor(
     public dialog: MatDialog, 
     private teamMemberService: TeamMemberService,
+    private teamAssociationService: TeamAssociationService,
     private snackBar: MatSnackBar) {
   }
 
@@ -45,7 +46,12 @@ export class TeamMembersComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.teamMemberService.create(result).then(() => {
-          this.snackBar.open('Team added successfully!', 'Close', { duration: 3000 });
+          
+          this.teamAssociationService.createMultiple(result.associations).then(() => {
+            this.loadTeams();
+          });
+
+          this.snackBar.open('Team member added successfully!', 'Close', { duration: 3000 });
         });
       }
     });
@@ -53,7 +59,7 @@ export class TeamMembersComponent {
 
   delete(id: string) {
     this.teamMemberService.delete(id).then(() => {
-      this.snackBar.open('Team deleted successfully!', 'Close', { duration: 3000 });
+      this.snackBar.open('Team member deleted successfully!', 'Close', { duration: 3000 });
     });
   }
 
@@ -65,8 +71,13 @@ export class TeamMembersComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.teamMemberService.update(teamMember.id!, result).then(() => {
-          this.snackBar.open('Team updated successfully!', 'Close', { duration: 3000 });
+        this.teamMemberService.update(teamMember.id!, result.data).then(() => {
+
+          this.teamAssociationService.replaceMultipleByUser(result.data.id, result.associations).then(() => {
+            this.loadTeams();
+          });
+          
+          this.snackBar.open('Team member updated successfully!', 'Close', { duration: 3000 });
         });
       }
     });

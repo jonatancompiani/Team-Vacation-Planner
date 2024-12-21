@@ -23,10 +23,6 @@ export class TeamAssociationService {
     private teamService: TeamService
   ) {}
 
-  getAll(): Observable<TeamAssociation[]> {
-    return this.afs.collection<TeamAssociation>(this.collectionName).valueChanges({ idField: 'id' });
-  }
-
   getByUserId(userId: string): Observable<TeamAssociation[]> {
     return this.afs
       .collection<TeamAssociation>(
@@ -72,14 +68,6 @@ export class TeamAssociationService {
     return items;
   }
 
-  create(team: TeamAssociation) {
-    return this.afs.collection(this.collectionName).add(team);
-  }
-
-  update(id: string, team: Partial<TeamAssociation>) {
-    return this.afs.collection(this.collectionName).doc(id).update(team);
-  }
-
   // Bulk insert method
   createMultiple(teams: TeamAssociation[]): Promise<void> {
     const batch = this.afs.firestore.batch();
@@ -93,19 +81,19 @@ export class TeamAssociationService {
     return batch.commit();
   }
 
-  // Batch update method
-  updateMultiple(updates: Array<{ id: string, data: Partial<TeamAssociation> }>): Promise<void> {
+  async replaceMultipleByUser(userId: string, newAssociations: TeamAssociation[]): Promise<void> {
     const batch = this.afs.firestore.batch();
+    const snapshot = await this.afs.collection<TeamAssociation>(this.collectionName).ref.where('userId', '==', userId).get();
 
-    updates.forEach(update => {
-      const docRef = this.afs.collection(this.collectionName).doc(update.id).ref;
-      batch.update(docRef, update.data);
+    snapshot.forEach(doc => {
+      batch.delete(doc.ref);
     });
 
-    return batch.commit();
-  }
+    newAssociations.forEach(association => {
+      const newDocRef = this.afs.collection(this.collectionName).doc().ref;
+      batch.set(newDocRef, { ...association, userId });
+    });
 
-  delete(id: string) {
-    return this.afs.collection(this.collectionName).doc(id).delete();
+    await batch.commit();
   }
 }

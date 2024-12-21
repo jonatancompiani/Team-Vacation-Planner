@@ -3,7 +3,7 @@ import { TeamMember } from '../models/TeamMember';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { catchError, forkJoin, map, mergeMap, Observable, of, take } from 'rxjs';
-import { TeamAssociationService } from './teamAssociations.service';
+import { TeamAssociation, TeamAssociationService } from './teamAssociations.service';
 
 export interface UserEnriched {
   id?: string;
@@ -11,7 +11,7 @@ export interface UserEnriched {
   name: string;
   pictureUrl: string;
   vacations: Date[];
-  teamNames: string[];
+  teams: TeamAssociation[];
 }
 
 @Injectable({
@@ -59,15 +59,15 @@ export class TeamMemberService {
         mergeMap(users => {
 
           const userObservables = users.map(user =>
-            this.teamAssociationService.getEnrichedTeamAssociations(user.id).pipe(
-              take(1), // Ensure the observable completes
+            this.teamAssociationService.getEnrichedTeamAssociations(user.id!).pipe(
+              // Ensure the observable completes
               map(returnedValue => ({
                 ...user,
-                teamNames: (returnedValue || [])
-                  .map(x => x.teamName)
-                  .filter((teamName): teamName is string => !!teamName)
+                teams: (returnedValue || [])
+                  .map(x => ({ id: x.teamId, name: x.teamName }))
+                  .filter((team): team is { id: string, name: string } => !!team.id && !!team.name)
               })),
-              catchError(() => of({ ...user, teamNames: [] })) // Handle errors
+              catchError(() => of({ ...user, teams: [] })) // Handle errors
             )
           );
 
