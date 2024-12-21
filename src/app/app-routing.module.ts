@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TeamComponent } from './components/Team/team/team.component';
 import { TeamMembersComponent } from './components/TeamMember/team-members/team-members.component';
 import { YearTableComponent } from './components/Calendar/year-table/year-table.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/Calendar/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: YearTableComponent },
